@@ -1,5 +1,9 @@
 # Jobs-DATN-Shoes-E-BE-Nodejs
 
+# RUN SERVER:
+
+nodemon
+
 # APIS
 
 ## USERS
