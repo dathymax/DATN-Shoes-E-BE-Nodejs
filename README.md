@@ -6,6 +6,14 @@ nodemon
 
 # APIS
 
+## LOGIN
+
+### METHOD POST
+
+http://localhost:8000/api/v1/auth
+
+body {"email": "example@email.com", "password": "example"}
+
 ## USERS
 
 ### GET ALL: METHOD GET
