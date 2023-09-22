@@ -18,7 +18,7 @@ export default class ReviewControllers {
             console.log(error);
             return res.sendStatus(400);
         }
-    }
+    };
 
     getReviewById = async (req: Request, res: Response) => {
         try {
@@ -35,7 +35,7 @@ export default class ReviewControllers {
             console.log(error);
             return res.sendStatus(400);
         }
-    }
+    };
 
     createReview = async (req: Request, res: Response) => {
         try {
@@ -45,23 +45,25 @@ export default class ReviewControllers {
             const existingUser = await getUserBySesstionToken(sessionToken);
 
             if (!title || !rate) {
-                return res.sendStatus(400)
+                return res.sendStatus(400);
             }
 
             const review = await this._services.createReview({
                 title,
                 description,
                 rate,
-                authorName: existingUser ? existingUser.fullname : "",
-                reviewDate: new Date()
-            })
+                authorName: existingUser
+                    ? `${existingUser.firstname} ${existingUser.lastname}`
+                    : "",
+                reviewDate: new Date(),
+            });
 
             return res.status(200).json(review).end();
         } catch (error) {
             console.log(error);
             return res.sendStatus(400);
         }
-    }
+    };
 
     updateReviewById = async (req: Request, res: Response) => {
         try {
@@ -74,19 +76,18 @@ export default class ReviewControllers {
                 return res.sendStatus(400);
             }
 
-            const updatedReview = await this._services.updateReviewById(
-                id,
-                {
-                    title, description, rate
-                }
-            );
+            const updatedReview = await this._services.updateReviewById(id, {
+                title,
+                description,
+                rate,
+            });
 
             return res.status(200).json(updatedReview).end();
         } catch (error) {
             console.log(error);
             return res.sendStatus(400);
         }
-    }
+    };
 
     deleteReviewById = async (req: Request, res: Response) => {
         try {
@@ -104,5 +105,5 @@ export default class ReviewControllers {
             console.log(error);
             return res.sendStatus(400);
         }
-    }
+    };
 }

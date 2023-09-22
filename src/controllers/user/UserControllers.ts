@@ -1,6 +1,6 @@
-import { Request, Response } from 'express';
+import { Request, Response } from "express";
 import UserServices from "../../services/user/UserServices";
-import { random, authentication } from '../../helpers';
+import { random, authentication } from "../../helpers";
 
 export default class UserControllers {
     _services: UserServices;
@@ -35,13 +35,13 @@ export default class UserControllers {
             console.log(error);
             return res.sendStatus(400);
         }
-    }
+    };
 
     createUser = async (req: Request, res: Response) => {
         try {
-            const { email, password, username, fullname } = req.body;
+            const { email, password, username, firstname, lastname } = req.body;
 
-            if (!email || !password || !username) {
+            if (!email || !password) {
                 return res.sendStatus(400);
             }
 
@@ -53,14 +53,15 @@ export default class UserControllers {
 
             const salt = random();
             const user = await this._services.createUser({
-                fullname: fullname || "",
+                firstname: firstname || "",
+                lastname: lastname || "",
                 email,
-                username,
+                username: username || "",
                 authentication: {
                     salt,
                     password: authentication(salt, password),
-                }
-            })
+                },
+            });
 
             if (user.status === 400) {
                 return res.sendStatus(400);
@@ -71,7 +72,7 @@ export default class UserControllers {
             console.log(error);
             return res.sendStatus(400);
         }
-    }
+    };
 
     deleteUserById = async (req: Request, res: Response) => {
         try {
@@ -90,12 +91,12 @@ export default class UserControllers {
             console.log(error);
             return res.sendStatus(400);
         }
-    }
+    };
 
     updateUserById = async (req: Request, res: Response) => {
         try {
             const { id } = req.params;
-            const { fullname } = req.body;
+            const { firstname, lastname } = req.body;
 
             const user = await this._services.getUserById(id);
 
@@ -103,12 +104,15 @@ export default class UserControllers {
                 return res.sendStatus(400);
             }
 
-            const updatedUser = await this._services.updateUserById(id, { fullname });
+            const updatedUser = await this._services.updateUserById(id, {
+                firstname,
+                lastname,
+            });
 
             return res.status(200).json(updatedUser).end();
         } catch (error) {
             console.log(error);
             return res.sendStatus(400);
         }
-    }
+    };
 }
