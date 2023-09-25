@@ -26,7 +26,7 @@ export default class UserControllers {
 
             const user = await this._services.getUserById(id);
 
-            if (!user.response.data) {
+            if (!user.data) {
                 return res.sendStatus(400);
             }
 
@@ -47,7 +47,7 @@ export default class UserControllers {
 
             const existingUser = await this._services.getUserByEmail(email);
 
-            if (existingUser.response.data) {
+            if (existingUser.data) {
                 return res.sendStatus(400);
             }
 
@@ -80,7 +80,7 @@ export default class UserControllers {
 
             const user = await this._services.getUserById(id);
 
-            if (!user.response.data) {
+            if (!user.data) {
                 return res.sendStatus(400);
             }
 
@@ -100,7 +100,7 @@ export default class UserControllers {
 
             const user = await this._services.getUserById(id);
 
-            if (!user.response.data) {
+            if (!user.data) {
                 return res.sendStatus(400);
             }
 

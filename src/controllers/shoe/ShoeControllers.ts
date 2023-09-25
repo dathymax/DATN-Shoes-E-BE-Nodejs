@@ -25,7 +25,7 @@ export default class ShoeControllers {
 
             const shoe = await this._services.getShoeById(id);
 
-            if (!shoe.response.data) {
+            if (!shoe.data) {
                 return res.sendStatus(400);
             }
 
@@ -66,7 +66,7 @@ export default class ShoeControllers {
 
             const shoe = await this._services.getShoeById(id);
 
-            if (!shoe.response.data) {
+            if (!shoe.data) {
                 return res.sendStatus(400);
             }
 
