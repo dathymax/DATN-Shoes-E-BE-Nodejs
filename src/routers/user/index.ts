@@ -25,4 +25,5 @@ export default (router: Router) => {
         isOwner,
         userController.getUserById
     );
+    router.post("/users/email", userController.getUserByEmail)
 };
