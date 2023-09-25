@@ -1,9 +1,5 @@
-interface IResponse<T> {
-    data?: T | T[] | null,
-}
-
 export interface IResponseEntity<T> {
-    response?: IResponse<T>,
+    data?: T | T[] | null,
     status?: number,
     message?: string,
 }
