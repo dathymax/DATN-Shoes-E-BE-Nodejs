@@ -6,10 +6,7 @@
 		"sourceMap": true,
 		"noImplicitAny": true,
 		"noUnusedLocals": false,
-		"baseUrl": ".",
-		"paths": {
-			"@/*": ["./src/*"]
-		}
+		"baseUrl": "src"
 	},
 	"include": ["src/**/*"]
 }

@@ -1,7 +1,7 @@
-import IUser from "models/user/IUser";
+import IUser from "../../models/user/IUser";
 import { UserModel } from "../../models/user/UserModel";
 import IUserServices from "./IUserServices";
-import { IResponseEntity } from "common/IResponseEntity";
+import { IResponseEntity } from "../../common/IResponseEntity";
 
 export default class UserServices implements IUserServices<IUser> {
     getUsers = async (): Promise<IResponseEntity<IUser>> => {
