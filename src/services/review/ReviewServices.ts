@@ -9,18 +9,14 @@ export default class ReviewServices implements IReviewServices<IReview> {
             const reviews = await ReviewModel.find();
 
             return {
-                response: {
-                    data: reviews,
-                },
+                data: reviews,
                 status: 200,
                 message: "Get review success!",
             }
         } catch (error) {
             console.log(error);
             return {
-                response: {
-                    data: null,
-                },
+                data: null,
                 status: 400,
                 message: "Get review failed!",
             }
@@ -32,18 +28,14 @@ export default class ReviewServices implements IReviewServices<IReview> {
             const review = await ReviewModel.findById(reviewId);
 
             return {
-                response: {
-                    data: review,
-                },
+                data: review,
                 status: 200,
                 message: "Get review success!",
             }
         } catch (error) {
             console.log(error);
             return {
-                response: {
-                    data: null,
-                },
+                data: null,
                 status: 400,
                 message: "Get review failed!",
             }
@@ -57,18 +49,14 @@ export default class ReviewServices implements IReviewServices<IReview> {
             review.save();
 
             return {
-                response: {
-                    data: review,
-                },
+                data: review,
                 status: 200,
                 message: "Create review success!",
             }
         } catch (error) {
             console.log(error);
             return {
-                response: {
-                    data: null,
-                },
+                data: null,
                 status: 400,
                 message: "Create review failed!",
             }
@@ -80,18 +68,14 @@ export default class ReviewServices implements IReviewServices<IReview> {
             const review = await ReviewModel.findByIdAndDelete({ _id: reviewId });
 
             return {
-                response: {
-                    data: review
-                },
+                data: review,
                 status: 200,
                 message: "Delete review failed!",
             }
         } catch (error) {
             console.log(error);
             return {
-                response: {
-                    data: null,
-                },
+                data: null,
                 status: 400,
                 message: "Delete review failed!",
             }
@@ -103,18 +87,14 @@ export default class ReviewServices implements IReviewServices<IReview> {
             const review = await ReviewModel.findByIdAndUpdate(reviewId, values, { new: true });
 
             return {
-                response: {
-                    data: review,
-                },
+                data: review,
                 status: 200,
                 message: "Update review success!",
             }
         } catch (error) {
             console.log(error);
             return {
-                response: {
-                    data: null,
-                },
+                data: null,
                 status: 400,
                 message: "Update review failed!"
             }

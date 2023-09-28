@@ -2,11 +2,11 @@
 	"compilerOptions": {
 		"module": "NodeNext",
 		"moduleResolution": "Node",
-		"baseUrl": "src",
 		"outDir": "dist",
 		"sourceMap": true,
 		"noImplicitAny": true,
-		"noUnusedLocals": false
+		"noUnusedLocals": false,
+		"baseUrl": "src"
 	},
 	"include": ["src/**/*"]
 }

@@ -9,18 +9,14 @@ export default class ShoeServices implements IShoeServices<IShoe> {
             const shoes = await ShoeModel.find();
 
             return {
-                response: {
-                    data: shoes,
-                },
+                data: shoes,
                 status: 200,
                 message: "Get shoes success!",
             }
         } catch (error) {
             console.log(error)
             return {
-                response: {
-                    data: null,
-                },
+                data: null,
                 status: 400,
                 message: "Get shoes failed!",
             }
@@ -32,18 +28,14 @@ export default class ShoeServices implements IShoeServices<IShoe> {
             const shoe = await ShoeModel.findById(shoeId);
 
             return {
-                response: {
-                    data: shoe,
-                },
+                data: shoe,
                 status: 200,
                 message: "Get shoe success!",
             }
         } catch (error) {
             console.log(error);
             return {
-                response: {
-                    data: null,
-                },
+                data: null,
                 status: 400,
                 message: "Get shoe failed!",
             }
@@ -55,18 +47,14 @@ export default class ShoeServices implements IShoeServices<IShoe> {
             const shoe = await ShoeModel.findOne({ shoeType });
 
             return {
-                response: {
-                    data: shoe,
-                },
+                data: shoe,
                 status: 400,
                 message: "Get shoe failed!",
             }
         } catch (error) {
             console.log(error);
             return {
-                response: {
-                    data: null,
-                },
+                data: null,
                 status: 400,
                 message: "Get shoe failed!",
             }
@@ -80,18 +68,14 @@ export default class ShoeServices implements IShoeServices<IShoe> {
             await shoe.save();
 
             return {
-                response: {
-                    data: shoe,
-                },
+                data: shoe,
                 status: 200,
                 message: "Create shoe success!",
             }
         } catch (error) {
             console.log(error);
             return {
-                response: {
-                    data: null,
-                },
+                data: null,
                 status: 400,
                 message: "Create shoe failed!",
             }
@@ -103,18 +87,14 @@ export default class ShoeServices implements IShoeServices<IShoe> {
             const shoe = await ShoeModel.findByIdAndUpdate(shoeId, values, { new: true });
 
             return {
-                response: {
-                    data: shoe,
-                },
+                data: shoe,
                 status: 200,
                 message: "Update shoe success!",
             }
         } catch (error) {
             console.log(error);
             return {
-                response: {
-                    data: null,
-                },
+                data: null,
                 status: 400,
                 message: "Update shoe failed!",
             }
@@ -126,18 +106,14 @@ export default class ShoeServices implements IShoeServices<IShoe> {
             const shoe = await ShoeModel.findByIdAndDelete({ _id: shoeId });
 
             return {
-                response: {
-                    data: shoe,
-                },
+                data: shoe,
                 status: 200,
                 message: "Delete shoe success!",
             }
         } catch (error) {
             console.log(error);
             return {
-                response: {
-                    data: null,
-                },
+                data: null,
                 status: 400,
                 message: "Delete shoe failed!",
             }

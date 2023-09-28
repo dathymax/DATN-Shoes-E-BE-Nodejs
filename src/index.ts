@@ -10,7 +10,8 @@ import mongoose from "mongoose";
 const app = express();
 
 app.use(cors({
-    credentials: false
+    origin: "http://127.0.0.1:5173",
+    credentials: true
 }));
 app.use(compression());
 app.use(cookieParser());

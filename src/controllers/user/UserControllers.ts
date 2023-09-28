@@ -26,7 +26,7 @@ export default class UserControllers {
 
             const user = await this._services.getUserById(id);
 
-            if (!user.response.data) {
+            if (!user.data) {
                 return res.sendStatus(400);
             }
 
@@ -36,6 +36,23 @@ export default class UserControllers {
             return res.sendStatus(400);
         }
     };
+
+    getUserByEmail = async (req: Request, res: Response) => {
+        try {
+            const { email } = req.params;
+
+            const user = await this._services.getUserByEmail(email);
+
+            if (!user.data) {
+                return res.sendStatus(400);
+            }
+
+            return res.status(200).json(user);
+        } catch (error) {
+            console.log(error);
+            return res.sendStatus(400);
+        }
+    }
 
     createUser = async (req: Request, res: Response) => {
         try {
@@ -47,7 +64,7 @@ export default class UserControllers {
 
             const existingUser = await this._services.getUserByEmail(email);
 
-            if (existingUser.response.data) {
+            if (existingUser.data) {
                 return res.sendStatus(400);
             }
 
@@ -80,7 +97,7 @@ export default class UserControllers {
 
             const user = await this._services.getUserById(id);
 
-            if (!user.response.data) {
+            if (!user.data) {
                 return res.sendStatus(400);
             }
 
@@ -100,7 +117,7 @@ export default class UserControllers {
 
             const user = await this._services.getUserById(id);
 
-            if (!user.response.data) {
+            if (!user.data) {
                 return res.sendStatus(400);
             }
 

@@ -26,7 +26,7 @@ export default class ReviewControllers {
 
             const review = await this._services.getReviewById(id);
 
-            if (!review.response.data) {
+            if (!review.data) {
                 return res.sendStatus(400);
             }
 
@@ -72,7 +72,7 @@ export default class ReviewControllers {
 
             const existingReview = await this._services.getReviewById(id);
 
-            if (!existingReview.response.data) {
+            if (!existingReview.data) {
                 return res.sendStatus(400);
             }
 
@@ -94,7 +94,7 @@ export default class ReviewControllers {
             const { id } = req.params;
             const review = await this._services.getReviewById(id);
 
-            if (!review.response.data) {
+            if (!review.data) {
                 return res.sendStatus(400);
             }
 
