@@ -1,4 +1,8 @@
 import crypto from "crypto";
+import IUser from "models/user/IUser";
+import fs from "fs";
+import path from "path";
+import JWT from "jsonwebtoken";
 
 const SECRET = "JTADD-REST-API";
 

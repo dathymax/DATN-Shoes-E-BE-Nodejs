@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import UserServices from "../../services/user/UserServices";
-import { random, authentication } from "../../helpers";
+import bcryptjs from "bcryptjs";
+import { authentication, random } from "../../helpers";
 
 export default class UserControllers {
     _services: UserServices;
@@ -54,7 +55,7 @@ export default class UserControllers {
         }
     }
 
-    createUser = async (req: Request, res: Response) => {
+    createUserWithAuthen = async (req: Request, res: Response) => {
         try {
             const { email,
                 password,
@@ -107,6 +108,61 @@ export default class UserControllers {
             if (user.status === 400) {
                 return res.sendStatus(400);
             }
+
+            return res.status(200).json(user).end();
+        } catch (error) {
+            console.log(error);
+            return res.sendStatus(400);
+        }
+    };
+
+    createUser = async (req: Request, res: Response) => {
+        try {
+            const { email,
+                password,
+                username,
+                firstname,
+                lastname,
+                role,
+                phoneNumber,
+                address,
+                addressLabel,
+                country,
+                province,
+                district,
+                postalCode,
+                city,
+                avatar } = req.body;
+
+            if (!email || !password) {
+                return res.sendStatus(400);
+            }
+
+            const existingUser = await this._services.getUserByEmail(email);
+
+            if (existingUser.data) {
+                return res.sendStatus(400);
+            }
+
+            const encodePassword = await bcryptjs.hash(password, 8);
+
+            const user = await this._services.createUser({
+                firstname: firstname || "",
+                lastname: lastname || "",
+                email,
+                username: username || "",
+                password: encodePassword,
+                role,
+                phoneNumber,
+                address,
+                addressLabel,
+                country,
+                province,
+                district,
+                postalCode,
+                city,
+                avatar
+            });
 
             return res.status(200).json(user).end();
         } catch (error) {

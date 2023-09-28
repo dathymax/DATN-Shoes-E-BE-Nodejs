@@ -1,27 +1,27 @@
-import { isAuthenticated, isOwner } from "../../middlewares";
+import { checkAuthentication, isOwner } from "../../middlewares";
 import UserControllers from "../../controllers/user/UserControllers";
 import { Router } from "express";
 
 const userController = new UserControllers();
 
 export default (router: Router) => {
-    router.get("/users", isAuthenticated, userController.getAllUsers);
+    router.get("/users", checkAuthentication, userController.getAllUsers);
     router.post("/users", userController.createUser);
     router.delete(
         "/users/:id",
-        isAuthenticated,
+        checkAuthentication,
         isOwner,
         userController.deleteUserById
     );
     router.patch(
         "/users/:id",
-        isAuthenticated,
+        checkAuthentication,
         isOwner,
         userController.updateUserById
     );
     router.get(
         "/users/:id",
-        isAuthenticated,
+        checkAuthentication,
         isOwner,
         userController.getUserById
     );

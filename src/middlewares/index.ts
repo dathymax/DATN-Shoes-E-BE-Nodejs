@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { get, merge } from "lodash";
 import { UserModel } from "../models/user/UserModel";
+import JWT from "jsonwebtoken";
 
 export const getUserBySesstionToken = (sesstionToken: string) => UserModel.findOne({
     "authentication.sessionToken": sesstionToken
@@ -48,4 +49,19 @@ export const isAuthenticated = async (req: Request, res: Response, next: NextFun
         console.log(error);
         return res.sendStatus(400);
     }
+}
+
+export async function checkAuthentication(req: Request, res: Response, next: NextFunction) {
+    const authHeader = req.headers['authorization']
+    const token = authHeader && authHeader.split(' ')[1]
+    if (token == null) return res.sendStatus(401)
+
+    JWT.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decodeToken) => {
+        if (err) {
+            console.log(err)
+            return res.sendStatus(403)
+        }
+        console.log(decodeToken);
+        next()
+    })
 }
