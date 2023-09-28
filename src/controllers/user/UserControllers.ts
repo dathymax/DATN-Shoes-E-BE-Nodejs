@@ -56,7 +56,21 @@ export default class UserControllers {
 
     createUser = async (req: Request, res: Response) => {
         try {
-            const { email, password, username, firstname, lastname } = req.body;
+            const { email,
+                password,
+                username,
+                firstname,
+                lastname,
+                role,
+                phoneNumber,
+                address,
+                addressLabel,
+                country,
+                province,
+                district,
+                postalCode,
+                city,
+                avatar } = req.body;
 
             if (!email || !password) {
                 return res.sendStatus(400);
@@ -78,6 +92,16 @@ export default class UserControllers {
                     salt,
                     password: authentication(salt, password),
                 },
+                role,
+                phoneNumber,
+                address,
+                addressLabel,
+                country,
+                province,
+                district,
+                postalCode,
+                city,
+                avatar
             });
 
             if (user.status === 400) {
@@ -113,7 +137,18 @@ export default class UserControllers {
     updateUserById = async (req: Request, res: Response) => {
         try {
             const { id } = req.params;
-            const { firstname, lastname } = req.body;
+            const { firstname,
+                lastname,
+                role,
+                phoneNumber,
+                address,
+                addressLabel,
+                country,
+                province,
+                district,
+                postalCode,
+                city,
+                avatar } = req.body;
 
             const user = await this._services.getUserById(id);
 
@@ -124,6 +159,16 @@ export default class UserControllers {
             const updatedUser = await this._services.updateUserById(id, {
                 firstname,
                 lastname,
+                role,
+                phoneNumber,
+                address,
+                addressLabel,
+                country,
+                province,
+                district,
+                postalCode,
+                city,
+                avatar
             });
 
             return res.status(200).json(updatedUser).end();

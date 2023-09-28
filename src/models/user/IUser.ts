@@ -12,4 +12,14 @@ export default interface IUser extends Document {
     email?: string;
     username?: string;
     authentication?: IAuthentication;
+    role?: string,
+    phoneNumber?: string,
+    address?: string,
+    addressLabel?: string,
+    country?: string,
+    province?: string,
+    district?: string,
+    postalCode?: string,
+    city?: string,
+    avatar?: string
 }
