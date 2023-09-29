@@ -3,15 +3,20 @@ import { get, merge } from "lodash";
 import { UserModel } from "../models/user/UserModel";
 import JWT from "jsonwebtoken";
 
-export const getUserBySesstionToken = (sesstionToken: string) => UserModel.findOne({
-    "authentication.sessionToken": sesstionToken
-});
+export const getUserBySesstionToken = (sesstionToken: string) =>
+    UserModel.findOne({
+        "authentication.sessionToken": sesstionToken,
+    });
 
-export const isOwner = async (req: Request, res: Response, next: NextFunction) => {
+export const isOwner = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
     try {
         const { id } = req.params;
 
-        const currentUserId = get(req, 'identity._id') as string;
+        const currentUserId = get(req, "identity._id") as string;
 
         if (!currentUserId) {
             return res.sendStatus(400);
@@ -26,9 +31,13 @@ export const isOwner = async (req: Request, res: Response, next: NextFunction) =
         console.log(error);
         return res.sendStatus(400);
     }
-}
+};
 
-export const isAuthenticated = async (req: Request, res: Response, next: NextFunction) => {
+export const isAuthenticated = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
     try {
         const sessionToken = req.cookies["USER-AUTH"];
 
@@ -49,19 +58,26 @@ export const isAuthenticated = async (req: Request, res: Response, next: NextFun
         console.log(error);
         return res.sendStatus(400);
     }
-}
+};
 
-export async function checkAuthentication(req: Request, res: Response, next: NextFunction) {
-    const authHeader = req.headers['authorization']
-    const token = authHeader && authHeader.split(' ')[1]
-    if (token == null) return res.sendStatus(401)
+export async function checkAuthentication(
+    req: Request,
+    res: Response,
+    next: NextFunction
+) {
+    const authHeader = req.headers["authorization"];
+    const token = authHeader && authHeader.replace(/^"(.*)"$/, "$1");
 
-    JWT.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decodeToken) => {
+    if (token == null) {
+        console.log("Unauthorized");
+        return res.sendStatus(401);
+    }
+
+    JWT.verify(token, process.env.JWT_KEY, (err) => {
         if (err) {
-            console.log(err)
-            return res.sendStatus(403)
+            console.log(err);
+            return res.sendStatus(403);
         }
-        console.log(decodeToken);
-        next()
-    })
+        next();
+    });
 }

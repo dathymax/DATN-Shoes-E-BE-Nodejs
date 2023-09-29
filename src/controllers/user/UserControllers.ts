@@ -53,11 +53,12 @@ export default class UserControllers {
             console.log(error);
             return res.sendStatus(400);
         }
-    }
+    };
 
     createUserWithAuthen = async (req: Request, res: Response) => {
         try {
-            const { email,
+            const {
+                email,
                 password,
                 username,
                 firstname,
@@ -71,7 +72,8 @@ export default class UserControllers {
                 district,
                 postalCode,
                 city,
-                avatar } = req.body;
+                avatar,
+            } = req.body;
 
             if (!email || !password) {
                 return res.sendStatus(400);
@@ -102,7 +104,7 @@ export default class UserControllers {
                 district,
                 postalCode,
                 city,
-                avatar
+                avatar,
             });
 
             if (user.status === 400) {
@@ -118,7 +120,8 @@ export default class UserControllers {
 
     createUser = async (req: Request, res: Response) => {
         try {
-            const { email,
+            const {
+                email,
                 password,
                 username,
                 firstname,
@@ -132,7 +135,8 @@ export default class UserControllers {
                 district,
                 postalCode,
                 city,
-                avatar } = req.body;
+                avatar,
+            } = req.body;
 
             if (!email || !password) {
                 return res.sendStatus(400);
@@ -161,7 +165,7 @@ export default class UserControllers {
                 district,
                 postalCode,
                 city,
-                avatar
+                avatar,
             });
 
             return res.status(200).json(user).end();
@@ -193,7 +197,8 @@ export default class UserControllers {
     updateUserById = async (req: Request, res: Response) => {
         try {
             const { id } = req.params;
-            const { firstname,
+            const {
+                firstname,
                 lastname,
                 role,
                 phoneNumber,
@@ -204,7 +209,8 @@ export default class UserControllers {
                 district,
                 postalCode,
                 city,
-                avatar } = req.body;
+                avatar,
+            } = req.body;
 
             const user = await this._services.getUserById(id);
 
@@ -224,7 +230,7 @@ export default class UserControllers {
                 district,
                 postalCode,
                 city,
-                avatar
+                avatar,
             });
 
             return res.status(200).json(updatedUser).end();

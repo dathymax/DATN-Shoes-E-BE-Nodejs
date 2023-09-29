@@ -1,4 +1,4 @@
-import { checkAuthentication, isOwner } from "../../middlewares";
+import { checkAuthentication } from "../../middlewares";
 import UserControllers from "../../controllers/user/UserControllers";
 import { Router } from "express";
 
@@ -10,20 +10,13 @@ export default (router: Router) => {
     router.delete(
         "/users/:id",
         checkAuthentication,
-        isOwner,
         userController.deleteUserById
     );
     router.patch(
         "/users/:id",
         checkAuthentication,
-        isOwner,
         userController.updateUserById
     );
-    router.get(
-        "/users/:id",
-        checkAuthentication,
-        isOwner,
-        userController.getUserById
-    );
-    router.post("/users/email", userController.getUserByEmail)
+    router.get("/users/:id", checkAuthentication, userController.getUserById);
+    router.post("/users/email", userController.getUserByEmail);
 };
