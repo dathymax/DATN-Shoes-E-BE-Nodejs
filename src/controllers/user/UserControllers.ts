@@ -208,9 +208,10 @@ export default class UserControllers {
                 province,
                 district,
                 postalCode,
+                username,
                 city,
-                avatar,
             } = req.body;
+            const avatar = req.file.path;
 
             const user = await this._services.getUserById(id);
 
@@ -229,7 +230,30 @@ export default class UserControllers {
                 province,
                 district,
                 postalCode,
+                username,
                 city,
+                avatar,
+            });
+
+            return res.status(200).json(updatedUser).end();
+        } catch (error) {
+            console.log(error);
+            return res.sendStatus(400);
+        }
+    };
+
+    updateUserAvatar = async (req: Request, res: Response) => {
+        try {
+            const { id } = req.params;
+            const { avatar } = req.body;
+            const user = await this._services.getUserById(id);
+
+            if (!user.data) {
+                return res.sendStatus(400);
+            }
+
+            const updatedUser = await this._services.updateUserById(id, {
+                ...user,
                 avatar,
             });
 

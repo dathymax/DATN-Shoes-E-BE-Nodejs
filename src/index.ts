@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import routers from "./routers";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import path from "path";
 
 dotenv.config();
 const app = express();
@@ -15,6 +16,7 @@ app.use(cors());
 app.use(compression());
 app.use(cookieParser());
 app.use(bodyParser.json());
+app.use("/upload", express.static(path.join(__dirname, "upload")));
 
 const server = http.createServer(app);
 
@@ -28,6 +30,6 @@ mongoose.Promise = Promise;
 mongoose.connect(MONGO_URL);
 mongoose.connection.on("error", (error: Error) => {
     console.log(error);
-})
+});
 
 app.use("/api/v1", routers());

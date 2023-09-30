@@ -6,6 +6,17 @@ import nodemailer from "nodemailer";
 
 export const getUserByEmail = (email: string) => UserModel.findOne({ email });
 
+export function countDays(startDate: Date, endDate: Date) {
+    const startMillis = startDate.getTime();
+    const endMillis = endDate.getTime();
+
+    const differenceMillis = endMillis - startMillis;
+
+    const differenceDays = Math.ceil(differenceMillis / 86400000);
+
+    return differenceDays;
+}
+
 export const login = async (req: Request, res: Response) => {
     try {
         const { email, password } = req.body;
@@ -63,6 +74,15 @@ export const updatePassword = async (req: Request, res: Response) => {
 
         if (!user) {
             return res.sendStatus(400);
+        }
+
+        const dateCount = countDays(new Date(user.updatedAt), new Date());
+
+        if (dateCount < 7) {
+            return res.status(400).json({
+                message:
+                    "It is possible to update the password again after 7 days.",
+            });
         }
 
         const compare = await bcryptjs.compare(password, user.password);
