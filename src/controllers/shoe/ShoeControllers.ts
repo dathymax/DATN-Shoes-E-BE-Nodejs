@@ -17,7 +17,7 @@ export default class ShoeControllers {
             console.log(error);
             return res.sendStatus(400);
         }
-    }
+    };
 
     getShoeById = async (req: Request, res: Response) => {
         try {
@@ -34,13 +34,25 @@ export default class ShoeControllers {
             console.log(error);
             return res.sendStatus(400);
         }
-    }
+    };
 
     createShoe = async (req: Request, res: Response) => {
         try {
-            const { name, rate, shoeType, color, price, size } = req.body;
+            const {
+                name,
+                rate,
+                shoeType,
+                color,
+                price,
+                size,
+                description,
+                category,
+                status,
+                discountType,
+                setDiscount,
+            } = req.body;
 
-            if (!name || !size || !shoeType || !color) {
+            if (!name) {
                 return res.sendStatus(400);
             }
 
@@ -50,15 +62,20 @@ export default class ShoeControllers {
                 shoeType,
                 color,
                 price,
-                size
-            })
+                size,
+                description,
+                category,
+                status,
+                discountType,
+                setDiscount,
+            });
 
             return res.status(200).json(shoe).end();
         } catch (error) {
             console.log(error);
             return res.sendStatus(400);
         }
-    }
+    };
 
     deleteShoeById = async (req: Request, res: Response) => {
         try {
@@ -77,33 +94,47 @@ export default class ShoeControllers {
             console.log(error);
             return res.sendStatus(400);
         }
-    }
+    };
 
     updateShoeById = async (req: Request, res: Response) => {
         try {
             const { id } = req.params;
-            const { name, size, price, rate, shoeType, color } = req.body;
+            const {
+                name,
+                size,
+                price,
+                rate,
+                shoeType,
+                color,
+                description,
+                category,
+                status,
+                discountType,
+                setDiscount,
+            } = req.body;
 
-            if (!name || !size || !shoeType || !color) {
+            if (!name) {
                 return res.sendStatus(400);
             }
 
-            const shoe = await this._services.updateShoeById(
-                id,
-                {
-                    name,
-                    size,
-                    price,
-                    rate,
-                    shoeType,
-                    color
-                }
-            )
+            const shoe = await this._services.updateShoeById(id, {
+                name,
+                size,
+                price,
+                rate,
+                shoeType,
+                color,
+                description,
+                category,
+                status,
+                discountType,
+                setDiscount,
+            });
 
             return res.status(200).json(shoe).end();
         } catch (error) {
             console.log(error);
             return res.sendStatus(400);
         }
-    }
+    };
 }

@@ -69,7 +69,7 @@ export default class CategoryServices implements ICategoryServices<ICategory> {
 
     updateCategoryById = async (
         id: string,
-        values: ICategory
+        values: Record<string, any>
     ): Promise<IResponseEntity<ICategory>> => {
         try {
             const updatedCategory = await CategoryModel.findByIdAndUpdate(

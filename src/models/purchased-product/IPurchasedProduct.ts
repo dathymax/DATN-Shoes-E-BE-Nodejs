@@ -1,4 +1,6 @@
-export default interface IPurchasedProduct {
+import { Document } from "mongoose";
+
+export default interface IPurchasedProduct extends Document {
     name?: string;
     category?: string;
     sku?: string;
