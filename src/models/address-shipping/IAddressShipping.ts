@@ -5,12 +5,13 @@ export enum EAddressLabel {
     OFFICE = "office"
 }
 
-export default interface IAddress extends Document {
+export default interface IAddressShipping extends Document {
     addressLabel?: EAddressLabel,
     country?: string,
     address?: string,
     province?: string,
     city?: string,
     district?: string,
-    postalCode?: string
+    postalCode?: string,
+    userId?: string
 }

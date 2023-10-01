@@ -126,7 +126,6 @@ export default class UserControllers {
                 username,
                 firstname,
                 lastname,
-                role,
                 phoneNumber,
                 address,
                 addressLabel,
@@ -156,7 +155,7 @@ export default class UserControllers {
                 email,
                 username: username || "",
                 password: encodePassword,
-                role,
+                role: "user",
                 phoneNumber,
                 address,
                 addressLabel,
@@ -198,9 +197,9 @@ export default class UserControllers {
         try {
             const { id } = req.params;
             const {
+                username,
                 firstname,
                 lastname,
-                role,
                 phoneNumber,
                 address,
                 addressLabel,
@@ -208,10 +207,10 @@ export default class UserControllers {
                 province,
                 district,
                 postalCode,
-                username,
                 city,
+                role,
             } = req.body;
-            const avatar = req.file.path;
+            const avatar = req?.file?.path;
 
             const user = await this._services.getUserById(id);
 
@@ -220,9 +219,9 @@ export default class UserControllers {
             }
 
             const updatedUser = await this._services.updateUserById(id, {
+                username,
                 firstname,
                 lastname,
-                role,
                 phoneNumber,
                 address,
                 addressLabel,
@@ -230,9 +229,9 @@ export default class UserControllers {
                 province,
                 district,
                 postalCode,
-                username,
                 city,
-                avatar,
+                role,
+                avatar: avatar || ""
             });
 
             return res.status(200).json(updatedUser).end();

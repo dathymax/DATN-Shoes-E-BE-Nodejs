@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import IAddress from "./IAddress";
+import IAddressShipping from "./IAddressShipping";
 
-const AddressSchema = new mongoose.Schema<IAddress>({
+const AddressShippingSchema = new mongoose.Schema<IAddressShipping>({
     addressLabel: { type: String, required: false },
     address: { type: String, required: false },
     country: { type: String, required: false },
@@ -9,6 +9,7 @@ const AddressSchema = new mongoose.Schema<IAddress>({
     province: { type: String, required: false },
     district: { type: String, required: false },
     postalCode: { type: String, required: false },
+    userId: { type: String, required: false }
 })
 
-export const AddressModel = mongoose.model("Address", AddressSchema);
+export const AddressShippingModel = mongoose.model("AddressShipping", AddressShippingSchema);

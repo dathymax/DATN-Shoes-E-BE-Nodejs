@@ -4,6 +4,7 @@ import auth from "./auth";
 import shoe from "./shoe";
 import review from "./review";
 import category from "./category";
+import addressShipping from "./address-shipping";
 
 const router = Router();
 
@@ -13,6 +14,7 @@ export default (): Router => {
     shoe(router);
     review(router);
     category(router);
+    addressShipping(router);
 
     return router;
 };

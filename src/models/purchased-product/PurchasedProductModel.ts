@@ -13,6 +13,6 @@ const PurchasedProductSchema = new mongoose.Schema<IPurchasedProduct>({
 });
 
 export const PurchasedProductModel = mongoose.model(
-    "Purchased product",
+    "PurchasedProduct",
     PurchasedProductSchema
 );

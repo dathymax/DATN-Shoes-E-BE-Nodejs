@@ -187,5 +187,5 @@ export const forgotPassword = async (req: Request, res: Response) => {
             }
         });
         console.log(link);
-    } catch (error) {}
+    } catch (error) { }
 };
