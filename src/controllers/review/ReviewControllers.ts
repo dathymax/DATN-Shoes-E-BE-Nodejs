@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import ReviewServices from "../../services/review/ReviewServices";
-import { getUserBySesstionToken } from "../../middlewares";
+import { UserModel } from "../../models/user/UserModel";
 
 export default class ReviewControllers {
     _services: ReviewServices;
@@ -39,10 +39,9 @@ export default class ReviewControllers {
 
     createReview = async (req: Request, res: Response) => {
         try {
-            const sessionToken = req.cookies["USER-AUTH"];
-            const { title, description, rate } = req.body;
+            const { authorName, authorEmail, title, description, rate, userId } = req.body;
 
-            const existingUser = await getUserBySesstionToken(sessionToken);
+            const user = await UserModel.findById(userId);
 
             if (!title || !rate) {
                 return res.sendStatus(400);
@@ -52,9 +51,10 @@ export default class ReviewControllers {
                 title,
                 description,
                 rate,
-                authorName: existingUser
-                    ? `${existingUser.firstname} ${existingUser.lastname}`
-                    : "",
+                authorName: !authorName
+                    ? `${user.firstname || ""} ${user.lastname || ""}`
+                    : authorName,
+                authorEmail: !authorEmail ? (user.email || "") : authorEmail,
                 reviewDate: new Date(),
             });
 
