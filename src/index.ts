@@ -16,7 +16,7 @@ app.use(cors());
 app.use(compression());
 app.use(cookieParser());
 app.use(bodyParser.json());
-app.use("/upload", express.static(path.join(__dirname, "upload")));
+app.use(express.static("public"));
 
 const server = http.createServer(app);
 

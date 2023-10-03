@@ -1,3 +1,4 @@
+import IImages from "models/image/IImage";
 import { Document } from "mongoose";
 
 export default interface IShoe extends Document {
@@ -12,4 +13,5 @@ export default interface IShoe extends Document {
     status?: string;
     discountType?: string;
     setDiscount?: string;
+    images?: IImages[]
 }

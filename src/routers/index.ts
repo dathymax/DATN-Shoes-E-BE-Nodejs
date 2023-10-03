@@ -5,6 +5,7 @@ import shoe from "./shoe";
 import review from "./review";
 import category from "./category";
 import addressShipping from "./address-shipping";
+import image from "./image";
 
 const router = Router();
 
@@ -15,6 +16,7 @@ export default (): Router => {
     review(router);
     category(router);
     addressShipping(router);
+    image(router);
 
     return router;
 };

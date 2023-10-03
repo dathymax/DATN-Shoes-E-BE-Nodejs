@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import UserServices from "../../services/user/UserServices";
 import bcryptjs from "bcryptjs";
 import { authentication, random } from "../../helpers";
+import { UserModel } from "../../models/user/UserModel";
 
 export default class UserControllers {
     _services: UserServices;
@@ -210,9 +211,10 @@ export default class UserControllers {
                 city,
                 role,
             } = req.body;
-            const avatar = req?.file?.path;
+            const avatar = req?.file?.filename;
 
             const user = await this._services.getUserById(id);
+            const userModel = await UserModel.findById({ _id: id });
 
             if (!user.data) {
                 return res.sendStatus(400);
@@ -231,7 +233,7 @@ export default class UserControllers {
                 postalCode,
                 city,
                 role,
-                avatar: avatar || ""
+                avatar: avatar || userModel.avatar || ""
             });
 
             return res.status(200).json(updatedUser).end();

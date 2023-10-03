@@ -13,6 +13,7 @@ const ShoeSchema = new mongoose.Schema<IShoe>({
     status: { type: String, required: false },
     discountType: { type: String, required: false },
     setDiscount: { type: String, required: false },
+    images: [{ type: mongoose.Schema.ObjectId, ref: "Image" }],
 });
 
 export const ShoeModel = mongoose.model("Shoe", ShoeSchema);

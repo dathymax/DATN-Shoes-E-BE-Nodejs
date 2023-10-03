@@ -22,7 +22,7 @@ export const storage = multer.diskStorage({
         file: Express.Multer.File,
         callback: DestinationCallback
     ): void => {
-        callback(null, "upload");
+        callback(null, "public/uploads");
     },
 
     filename: (
@@ -32,9 +32,7 @@ export const storage = multer.diskStorage({
     ): void => {
         callback(
             null,
-            new Date().toISOString().replace(/:/g, "-") +
-                "-" +
-                file.originalname
+            file.originalname
         );
     },
 });
