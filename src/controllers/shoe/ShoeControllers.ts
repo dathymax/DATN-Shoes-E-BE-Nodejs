@@ -12,6 +12,10 @@ export default class ShoeControllers {
         try {
             const shoes = await this._services.getShoes();
 
+            if (!shoes.data) {
+                return res.sendStatus(400);
+            }
+
             return res.status(200).json(shoes).end();
         } catch (error) {
             console.log(error);

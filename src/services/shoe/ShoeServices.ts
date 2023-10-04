@@ -6,7 +6,7 @@ import { ShoeModel } from "../../models/shoe/ShoeModel";
 export default class ShoeServices implements IShoeServices<IShoe> {
     getShoes = async (): Promise<IResponseEntity<IShoe>> => {
         try {
-            const shoes = await ShoeModel.find();
+            const shoes = await ShoeModel.find().populate('images');
 
             return {
                 data: shoes,
@@ -25,7 +25,7 @@ export default class ShoeServices implements IShoeServices<IShoe> {
 
     getShoeById = async (shoeId: string): Promise<IResponseEntity<IShoe>> => {
         try {
-            const shoe = await ShoeModel.findById(shoeId);
+            const shoe = await ShoeModel.findById(shoeId).populate('images');
 
             return {
                 data: shoe,
