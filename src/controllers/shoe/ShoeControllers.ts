@@ -54,7 +54,7 @@ export default class ShoeControllers {
                 status,
                 discountType,
                 setDiscount,
-                images
+                images,
             } = req.body;
 
             if (!name) {
@@ -73,7 +73,7 @@ export default class ShoeControllers {
                 status,
                 discountType,
                 setDiscount,
-                images
+                images,
             });
 
             return res.status(200).json(shoe).end();
@@ -117,7 +117,7 @@ export default class ShoeControllers {
                 status,
                 discountType,
                 setDiscount,
-                images
+                images,
             } = req.body;
 
             if (!name) {
@@ -136,7 +136,7 @@ export default class ShoeControllers {
                 status,
                 discountType,
                 setDiscount,
-                images
+                images,
             });
 
             return res.status(200).json(shoe).end();

@@ -39,7 +39,14 @@ export default class ReviewControllers {
 
     createReview = async (req: Request, res: Response) => {
         try {
-            const { authorName, authorEmail, title, description, rate, userId } = req.body;
+            const {
+                authorName,
+                authorEmail,
+                title,
+                description,
+                rate,
+                userId,
+            } = req.body;
 
             const user = await UserModel.findById(userId);
 
@@ -54,14 +61,16 @@ export default class ReviewControllers {
                 authorName: !authorName
                     ? `${user.firstname || ""} ${user.lastname || ""}`
                     : authorName,
-                authorEmail: !authorEmail ? (user.email || "") : authorEmail,
+                authorEmail: !authorEmail ? user.email || "" : authorEmail,
                 reviewDate: new Date(),
             });
 
             return res.status(200).json(review).end();
         } catch (error) {
             console.log(error);
-            return res.sendStatus(400);
+            return res
+                .status(400)
+                .json({ message: "You must have login to write a review!" });
         }
     };
 

@@ -22,13 +22,15 @@ export const login = async (req: Request, res: Response) => {
         const { email, password } = req.body;
 
         if (!email || !password) {
-            return res.sendStatus(400);
+            return res
+                .status(400)
+                .json({ message: "Email and password is required!" });
         }
 
         const user = await UserModel.findOne({ email });
 
         if (!user) {
-            return res.sendStatus(400);
+            return res.status(400).json({ message: "User does not exist!" });
         }
 
         if (await bcryptjs.compare(password, user.password)) {
@@ -59,10 +61,17 @@ export const login = async (req: Request, res: Response) => {
             return res.status(200).json(token);
         }
 
-        return res.sendStatus(400);
+        return res
+            .status(400)
+            .json({ message: "Email or password is not correct!" });
     } catch (error) {
         console.log(error);
-        return res.sendStatus(400);
+        return res
+            .status(400)
+            .json({
+                message:
+                    "Error from server, please wait for a moment or try again!",
+            });
     }
 };
 
@@ -187,5 +196,5 @@ export const forgotPassword = async (req: Request, res: Response) => {
             }
         });
         console.log(link);
-    } catch (error) { }
+    } catch (error) {}
 };

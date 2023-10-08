@@ -70,13 +70,20 @@ export async function checkAuthentication(
 
     if (token == null) {
         console.log("Unauthorized");
-        return res.sendStatus(401);
+        return res
+            .status(401)
+            .json({ message: "You cannot use this service without log in!" });
     }
 
     JWT.verify(token, process.env.JWT_KEY, (err) => {
         if (err) {
             console.log(err);
-            return res.sendStatus(403);
+            return res
+                .status(403)
+                .json({
+                    message:
+                        "You do not have permission to perform this service!",
+                });
         }
         next();
     });

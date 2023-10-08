@@ -16,7 +16,7 @@ export default (router: Router) => {
     router.patch(
         "/users/:id",
         checkAuthentication,
-        upload.single("avatar"),
+        // upload.single("avatar"),
         userController.updateUserById
     );
     router.patch(

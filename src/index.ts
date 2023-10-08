@@ -24,7 +24,8 @@ server.listen(process.env.PORT, () => {
     console.log("Server is running on port 8000");
 });
 
-const MONGO_URL = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@shoes-e.ynjs1u7.mongodb.net`;
+const MONGO_URL = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@shoe-e.y7vyq3g.mongodb.net/
+`;
 
 mongoose.Promise = Promise;
 mongoose.connect(MONGO_URL);

@@ -139,13 +139,15 @@ export default class UserControllers {
             } = req.body;
 
             if (!email || !password) {
-                return res.sendStatus(400);
+                return res
+                    .status(400)
+                    .json({ message: "Email and password is required!" });
             }
 
             const existingUser = await this._services.getUserByEmail(email);
 
             if (existingUser.data) {
-                return res.sendStatus(400);
+                return res.status(400).json({ message: "User does existing!" });
             }
 
             const encodePassword = await bcryptjs.hash(password, 8);
@@ -171,7 +173,12 @@ export default class UserControllers {
             return res.status(200).json(user).end();
         } catch (error) {
             console.log(error);
-            return res.sendStatus(400);
+            return res
+                .status(400)
+                .json({
+                    message:
+                        "Error from server, please wait for a moment or try again!",
+                });
         }
     };
 
@@ -210,8 +217,9 @@ export default class UserControllers {
                 postalCode,
                 city,
                 role,
+                avatar,
             } = req.body;
-            const avatar = req?.file?.filename;
+            // const avatar = req?.file?.filename;
 
             const user = await this._services.getUserById(id);
             const userModel = await UserModel.findById({ _id: id });
@@ -233,7 +241,8 @@ export default class UserControllers {
                 postalCode,
                 city,
                 role,
-                avatar: avatar || userModel.avatar || ""
+                avatar,
+                // avatar: avatar || userModel.avatar || "",
             });
 
             return res.status(200).json(updatedUser).end();
@@ -252,6 +261,9 @@ export default class UserControllers {
             if (!user.data) {
                 return res.sendStatus(400);
             }
+
+            console.log(avatar);
+            console.log(user);
 
             const updatedUser = await this._services.updateUserById(id, {
                 ...user,
