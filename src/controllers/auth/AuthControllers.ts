@@ -3,19 +3,9 @@ import { Request, Response } from "express";
 import { UserModel } from "../../models/user/UserModel";
 import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
+import { countDays } from "../../helpers";
 
 export const getUserByEmail = (email: string) => UserModel.findOne({ email });
-
-export function countDays(startDate: Date, endDate: Date) {
-    const startMillis = startDate.getTime();
-    const endMillis = endDate.getTime();
-
-    const differenceMillis = endMillis - startMillis;
-
-    const differenceDays = Math.ceil(differenceMillis / 86400000);
-
-    return differenceDays;
-}
 
 export const login = async (req: Request, res: Response) => {
     try {
@@ -196,5 +186,5 @@ export const forgotPassword = async (req: Request, res: Response) => {
             }
         });
         console.log(link);
-    } catch (error) {}
+    } catch (error) { }
 };

@@ -14,6 +14,7 @@ const ShoeSchema = new mongoose.Schema<IShoe>({
     discountType: { type: String, required: false },
     setDiscount: { type: String, required: false },
     images: [{ type: mongoose.Schema.Types.ObjectId, ref: "Image" }],
-});
+    createDate: { type: Date, required: false }
+}, { timestamps: true });
 
 export const ShoeModel = mongoose.model("Shoe", ShoeSchema);

@@ -13,5 +13,22 @@ export default interface IShoe extends Document {
     status?: string;
     discountType?: string;
     setDiscount?: string;
-    images?: IImages[]
+    images?: IImages[];
+    createDate?: Date;
+}
+
+export interface IShoeUpdate {
+    name?: string;
+    rate?: number;
+    shoeType?: string;
+    color?: string;
+    size?: number;
+    price?: number;
+    description?: string;
+    category?: string;
+    status?: string;
+    discountType?: string;
+    setDiscount?: string;
+    images?: IImages[];
+    createDate?: Date;
 }

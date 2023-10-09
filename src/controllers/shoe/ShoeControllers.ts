@@ -74,6 +74,7 @@ export default class ShoeControllers {
                 discountType,
                 setDiscount,
                 images,
+                createDate: new Date()
             });
 
             return res.status(200).json(shoe).end();

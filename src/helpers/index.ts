@@ -54,3 +54,14 @@ export const imageFilter = (
         callback(null, false);
     }
 };
+
+export function countDays(startDate: Date, endDate: Date) {
+    const startMillis = startDate.getTime();
+    const endMillis = endDate.getTime();
+
+    const differenceMillis = endMillis - startMillis;
+
+    const differenceDays = Math.ceil(differenceMillis / 86400000);
+
+    return differenceDays;
+}

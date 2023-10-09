@@ -2,14 +2,17 @@ import IShoe from "../../models/shoe/IShoe";
 import IShoeServices from "./IShoeServices";
 import { IResponseEntity } from "../../common/IResponseEntity";
 import { ShoeModel } from "../../models/shoe/ShoeModel";
+import { mapShoesToUpdated } from "../../mapper/shoe";
 
 export default class ShoeServices implements IShoeServices<IShoe> {
     getShoes = async (): Promise<IResponseEntity<IShoe>> => {
         try {
             const shoes = await ShoeModel.find().populate('images');
 
+            const updatedShoes = mapShoesToUpdated(shoes);
+
             return {
-                data: shoes,
+                data: updatedShoes,
                 status: 200,
                 message: "Get shoes success!",
             }
