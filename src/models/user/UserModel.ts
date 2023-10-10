@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import IUser from "./IUser";
+import IUser, { IWishlistShoe } from "./IUser";
 
 const UserSchema = new mongoose.Schema<IUser>(
     {
@@ -23,4 +23,26 @@ const UserSchema = new mongoose.Schema<IUser>(
     { timestamps: true }
 );
 
+const WishlistShoeSchema = new mongoose.Schema<IWishlistShoe>(
+    {
+        name: { type: String, required: false },
+        rate: { type: Number, required: false },
+        shoeType: { type: String, required: false },
+        color: { type: String, required: false },
+        size: { type: Number, required: false },
+        price: { type: Number, required: false },
+        description: { type: String, required: false },
+        category: { type: String, required: false },
+        status: { type: String, required: false },
+        discountType: { type: String, required: false },
+        setDiscount: { type: String, required: false },
+        images: [{ type: mongoose.Schema.Types.ObjectId, ref: "Image" }],
+        createDate: { type: Date, required: false },
+        userId: { type: String, required: false },
+        isLiked: { type: Boolean, required: false },
+    },
+    { timestamps: true }
+)
+
 export const UserModel = mongoose.model("User", UserSchema);
+export const WishlistShoeModel = mongoose.model("WishlistShoe", WishlistShoeSchema);
