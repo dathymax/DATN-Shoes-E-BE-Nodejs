@@ -6,6 +6,7 @@ import review from "./review";
 import category from "./category";
 import addressShipping from "./address-shipping";
 import image from "./image";
+import wishlist from "./wishlist";
 
 const router = Router();
 
@@ -17,6 +18,7 @@ export default (): Router => {
     category(router);
     addressShipping(router);
     image(router);
+    wishlist(router);
 
     return router;
 };

@@ -36,6 +36,6 @@ export interface IWishlistShoe extends Document {
     setDiscount?: string;
     images?: IImages[];
     createDate?: Date;
+    isLiked?: boolean;
     userId?: string;
-    isLiked?: boolean
 }

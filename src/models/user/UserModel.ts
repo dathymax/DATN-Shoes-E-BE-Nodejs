@@ -38,8 +38,9 @@ const WishlistShoeSchema = new mongoose.Schema<IWishlistShoe>(
         setDiscount: { type: String, required: false },
         images: [{ type: mongoose.Schema.Types.ObjectId, ref: "Image" }],
         createDate: { type: Date, required: false },
-        userId: { type: String, required: false },
         isLiked: { type: Boolean, required: false },
+        userId: { type: String, required: false },
+        shoeId: { type: String, required: false },
     },
     { timestamps: true }
 )

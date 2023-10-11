@@ -27,7 +27,4 @@ export default (router: Router) => {
     );
     router.get("/users/:id", checkAuthentication, userController.getUserById);
     router.post("/users/email", userController.getUserByEmail);
-    router.get("/users/wishlist/:userId", checkAuthentication, userController.getWishlistShoeByUserId);
-    router.post("/users/wishlist", checkAuthentication, userController.addWishlistByUserId);
-    router.delete("/users/wishlist/:shoeId", checkAuthentication, userController.deleteWishlistShoeByShoeId)
 };

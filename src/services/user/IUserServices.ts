@@ -8,7 +8,4 @@ export default interface IUserServices<T> {
     getUserByEmail?: (email: string) => Promise<IResponseEntity<T>>,
     getUserById?: (userId: string) => Promise<IResponseEntity<T>>,
     updateUserById?: (userId: string, values: T) => Promise<IResponseEntity<T>>,
-    addWishlistByUserId?: (values: IShoe) => Promise<IResponseEntity<T>>,
-    getWishlistShoeByUserId?: (userId: string) => Promise<IResponseEntity<T>>,
-    deleteWishlistShoeByShoeId?: (shoeId: string) => Promise<IResponseEntity<T>>,
 }
