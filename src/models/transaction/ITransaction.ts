@@ -11,5 +11,5 @@ export default interface ITransaction extends Document {
     receiptNumber?: string | number;
     address?: string;
     payment?: string;
-    purchasedProduct?: IPurchasedProduct[];
+    purchasedProducts?: IPurchasedProduct[];
 }

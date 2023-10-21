@@ -1,5 +1,4 @@
 import IImages from "models/image/IImage";
-import IShoe from "models/shoe/IShoe";
 import { Document } from "mongoose";
 
 export default interface IUser extends Document {
