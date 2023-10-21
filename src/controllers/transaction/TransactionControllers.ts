@@ -93,6 +93,80 @@ class TransactionControllers {
                 .json({ message: "Create transaction failed!" });
         }
     };
+
+    update = async (req: Request, res: Response) => {
+        try {
+            const { id, transactionExt } = req.params;
+            const {
+                transactionNumber,
+                date,
+                invoice,
+                customerName,
+                phoneNumber,
+                status,
+                receiptNumber,
+                address,
+                payment,
+                purchasedProducts,
+            } = req.body;
+            const transaction = await this._services.update(id, {
+                transactionNumber,
+                date,
+                invoice,
+                customerName,
+                phoneNumber,
+                status,
+                receiptNumber,
+                address,
+                payment,
+            });
+            const products = await purchasedProducts.map(
+                (purchasedProduct: IPurchasedProduct) =>
+                    this._purchasedServices.updateByTransactionExt(
+                        transactionExt,
+                        purchasedProduct
+                    )
+            );
+
+            const response = {
+                ...transaction,
+                purchasedProducts: products,
+            };
+
+            return res.status(200).json(response).end();
+        } catch (error) {
+            console.log(error);
+            return res
+                .status(400)
+                .json({ message: "Update transaction failed!" });
+        }
+    };
+
+    delete = async (req: Request, res: Response) => {
+        try {
+            const { id, transactionExt } = req.params;
+            const deletedTransaction = await this._services.delete(id);
+            await this._purchasedServices.deleteByTransactionExt(
+                transactionExt
+            );
+
+            if (deletedTransaction.status !== 200) {
+                return res
+                    .status(400)
+                    .json({ message: "Delete transaction failed!" });
+            }
+
+            return res
+                .status(200)
+                .json({ message: "Delete transaction success!" })
+                .end();
+        } catch (error) {
+            console.log(error);
+            return res
+                .status(400)
+                .json({ message: "Delete transaction failed!" });
+        }
+    };
 }
 
 export default TransactionControllers;

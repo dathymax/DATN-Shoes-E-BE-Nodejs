@@ -142,13 +142,15 @@ class PurchasedProductServices
         }
     };
 
-    delete = async (
-        id: string
+    deleteByTransactionExt = async (
+        transactionExt: string
     ): Promise<IResponseEntity<IPurchasedProduct>> => {
         try {
-            const product = await PurchasedProductModel.findByIdAndDelete({
-                _id: id,
+            const deletedItems = await PurchasedProductModel.deleteMany({
+                transactionExt,
             });
+
+            console.log(deletedItems);
 
             return {
                 data: null,
@@ -161,6 +163,33 @@ class PurchasedProductServices
                 data: null,
                 status: 400,
                 message: "Delete purchase product failed!",
+            };
+        }
+    };
+
+    updateByTransactionExt = async (
+        transactionExt: string,
+        values: Record<string, any>
+    ): Promise<IResponseEntity<IPurchasedProduct>> => {
+        try {
+            const purchasedProduct =
+                await PurchasedProductModel.findOneAndUpdate(
+                    { transactionExt },
+                    values,
+                    { new: true }
+                );
+
+            return {
+                data: purchasedProduct,
+                status: 200,
+                message: "Update purchased by transaction id success!",
+            };
+        } catch (error) {
+            console.log(error);
+            return {
+                data: null,
+                status: 400,
+                message: "Update purchased by transaction id failed!",
             };
         }
     };
