@@ -1,4 +1,4 @@
-import IPurchasedProduct from "models/purchased-product/IPurchasedProduct";
+import IPurchasedProduct from "../../models/purchased-product/IPurchasedProduct";
 import { Document } from "mongoose";
 
 export default interface ITransaction extends Document {

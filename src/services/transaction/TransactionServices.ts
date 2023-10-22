@@ -1,7 +1,7 @@
-import ITransaction from "models/transaction/ITransaction";
+import ITransaction from "../../models/transaction/ITransaction";
 import ITransactionServices from "./ITransactionServices";
-import { IResponseEntity } from "common/IResponseEntity";
-import { TransactionModel } from "models/transaction/TransactionModel";
+import { IResponseEntity } from "../../common/IResponseEntity";
+import { TransactionModel } from "../../models/transaction/TransactionModel";
 
 class TransactionServices implements ITransactionServices<ITransaction> {
     getAll = async (): Promise<IResponseEntity<ITransaction>> => {

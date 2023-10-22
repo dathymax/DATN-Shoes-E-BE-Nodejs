@@ -1,7 +1,7 @@
-import IPurchasedProduct from "models/purchased-product/IPurchasedProduct";
+import IPurchasedProduct from "../../models/purchased-product/IPurchasedProduct";
 import IPurchasedProductServices from "./IPurchasedProductServices";
-import { IResponseEntity } from "common/IResponseEntity";
-import { PurchasedProductModel } from "models/purchased-product/PurchasedProductModel";
+import { IResponseEntity } from "../../common/IResponseEntity";
+import { PurchasedProductModel } from "../../models/purchased-product/PurchasedProductModel";
 
 class PurchasedProductServices
     implements IPurchasedProductServices<IPurchasedProduct>

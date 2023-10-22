@@ -1,6 +1,6 @@
-import TransactionControllers from "controllers/transaction/TransactionControllers";
+import TransactionControllers from "../../controllers/transaction/TransactionControllers";
 import { Router } from "express";
-import { checkAuthentication } from "middlewares";
+import { checkAuthentication } from "../../middlewares";
 
 const transactionControllers = new TransactionControllers();
 

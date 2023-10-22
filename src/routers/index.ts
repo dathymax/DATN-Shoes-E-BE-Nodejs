@@ -7,6 +7,7 @@ import category from "./category";
 import addressShipping from "./address-shipping";
 import image from "./image";
 import wishlist from "./wishlist";
+import transaction from "./transaction";
 
 const router = Router();
 
@@ -19,6 +20,7 @@ export default (): Router => {
     addressShipping(router);
     image(router);
     wishlist(router);
+    transaction(router);
 
     return router;
 };

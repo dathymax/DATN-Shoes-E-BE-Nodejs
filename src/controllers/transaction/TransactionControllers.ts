@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import IPurchasedProduct from "models/purchased-product/IPurchasedProduct";
-import PurchasedProductServices from "services/purchased-product/PurchasedProductServices";
-import TransactionServices from "services/transaction/TransactionServices";
+import IPurchasedProduct from "../../models/purchased-product/IPurchasedProduct";
+import PurchasedProductServices from "../../services/purchased-product/PurchasedProductServices";
+import TransactionServices from "../../services/transaction/TransactionServices";
 import { v4 } from "uuid";
 
 class TransactionControllers {
