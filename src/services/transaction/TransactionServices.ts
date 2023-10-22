@@ -6,7 +6,9 @@ import { TransactionModel } from "models/transaction/TransactionModel";
 class TransactionServices implements ITransactionServices<ITransaction> {
     getAll = async (): Promise<IResponseEntity<ITransaction>> => {
         try {
-            const transactions = await TransactionModel.find();
+            const transactions = await TransactionModel.find().populate(
+                "purchasedProducts"
+            );
 
             if (!transactions) {
                 return {
@@ -33,7 +35,9 @@ class TransactionServices implements ITransactionServices<ITransaction> {
 
     getById = async (id: string): Promise<IResponseEntity<ITransaction>> => {
         try {
-            const transaction = await TransactionModel.findById(id);
+            const transaction = (await TransactionModel.findById(id)).populated(
+                "purchasedProducts"
+            );
 
             if (!transaction) {
                 return {

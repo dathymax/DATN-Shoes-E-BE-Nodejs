@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import IPurchasedProduct from "models/purchased-product/IPurchasedProduct";
 import PurchasedProductServices from "services/purchased-product/PurchasedProductServices";
 import TransactionServices from "services/transaction/TransactionServices";
+import { v4 } from "uuid";
 
 class TransactionControllers {
     _services: TransactionServices;
@@ -52,28 +53,31 @@ class TransactionControllers {
     create = async (req: Request, res: Response) => {
         try {
             const {
-                transactionNumber,
-                date,
-                invoice,
                 customerName,
                 phoneNumber,
-                status,
-                receiptNumber,
                 address,
                 payment,
+                tax,
+                subTotal,
+                shipping,
+                discount,
                 purchasedProducts,
             } = req.body;
 
             const transaction = await this._services.create({
-                transactionNumber,
-                date,
-                invoice,
+                transactionNumber: v4(),
+                date: new Date(),
+                invoice: `INV/${v4()}`,
                 customerName,
                 phoneNumber,
-                status,
-                receiptNumber,
+                status: "process",
+                receiptNumber: v4(),
                 address,
                 payment,
+                tax,
+                subTotal,
+                shipping,
+                discount,
             });
             const products = await purchasedProducts.map(
                 (purchasedProduct: IPurchasedProduct) =>
@@ -97,26 +101,12 @@ class TransactionControllers {
     update = async (req: Request, res: Response) => {
         try {
             const { id, transactionExt } = req.params;
-            const {
-                transactionNumber,
-                date,
-                invoice,
-                customerName,
-                phoneNumber,
-                status,
-                receiptNumber,
-                address,
-                payment,
-                purchasedProducts,
-            } = req.body;
+            const { phoneNumber, status, address, payment, purchasedProducts } =
+                req.body;
             const transaction = await this._services.update(id, {
-                transactionNumber,
-                date,
-                invoice,
-                customerName,
+                date: new Date(),
                 phoneNumber,
                 status,
-                receiptNumber,
                 address,
                 payment,
             });

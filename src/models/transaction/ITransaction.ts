@@ -12,4 +12,8 @@ export default interface ITransaction extends Document {
     address?: string;
     payment?: string;
     purchasedProducts?: IPurchasedProduct[];
+    discount?: string;
+    shipping?: string | number;
+    tax?: string | number;
+    subTotal?: string | number;
 }
