@@ -1,4 +1,4 @@
-import IImages from "models/image/IImage";
+import IImage from "models/image/IImage";
 import { Document } from "mongoose";
 
 export default interface IUser extends Document {
@@ -33,7 +33,7 @@ export interface IWishlistShoe extends Document {
     status?: string;
     discountType?: string;
     setDiscount?: string;
-    images?: IImages[];
+    images?: IImage[];
     createDate?: Date;
     isLiked?: boolean;
     userId?: string;

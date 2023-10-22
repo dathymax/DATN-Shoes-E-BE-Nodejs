@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import IImages from "./IImage";
+import IImage from "./IImage";
 
-const ImageSchema = new mongoose.Schema<IImages>(
+const ImageSchema = new mongoose.Schema<IImage>(
     {
         fileName: {
             type: String,

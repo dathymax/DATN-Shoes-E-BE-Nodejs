@@ -1,4 +1,4 @@
-import { IResponseEntity } from "common/IResponseEntity";
+import { IResponseEntity } from "../../common/IResponseEntity";
 
 export default interface ITransactionServices<T> {
     getAll?: () => Promise<IResponseEntity<T>>;
@@ -6,4 +6,5 @@ export default interface ITransactionServices<T> {
     create?: (values: T) => Promise<IResponseEntity<T>>;
     update?: (id: string, values: T) => Promise<IResponseEntity<T>>;
     delete?: (id: string) => Promise<IResponseEntity<T>>;
+    getAllReturnsTransaction?: () => Promise<IResponseEntity<T>>;
 }

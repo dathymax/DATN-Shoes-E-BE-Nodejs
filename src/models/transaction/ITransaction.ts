@@ -1,3 +1,4 @@
+import IImage from "../../models/image/IImage";
 import IPurchasedProduct from "../../models/purchased-product/IPurchasedProduct";
 import { Document } from "mongoose";
 
@@ -16,4 +17,6 @@ export default interface ITransaction extends Document {
     shipping?: string | number;
     tax?: string | number;
     subTotal?: string | number;
+    reason?: string,
+    imagesRoof?: IImage[]
 }

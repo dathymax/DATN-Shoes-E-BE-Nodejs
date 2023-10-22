@@ -18,6 +18,8 @@ const TransactionSchema = new mongoose.Schema<ITransaction>({
     purchasedProducts: [
         { type: mongoose.Schema.Types.ObjectId, ref: "PurchasedProduct" },
     ],
+    reason: { type: String, required: false },
+    imagesRoof: [{ type: mongoose.Schema.Types.ObjectId, ref: "Image" }],
 });
 
 export const TransactionModel = mongoose.model(

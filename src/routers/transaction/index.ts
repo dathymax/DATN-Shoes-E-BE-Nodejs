@@ -11,6 +11,11 @@ export default (router: Router) => {
         transactionControllers.getAll
     );
     router.get(
+        "/transactions/returns",
+        checkAuthentication,
+        transactionControllers.getAllReturnsTransaction
+    );
+    router.get(
         "/transactions/:id",
         checkAuthentication,
         transactionControllers.getById

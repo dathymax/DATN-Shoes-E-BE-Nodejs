@@ -263,11 +263,8 @@ export default class UserControllers {
                 return res.sendStatus(400);
             }
 
-            console.log(avatar);
-            console.log(user);
-
             const updatedUser = await this._services.updateUserById(id, {
-                ...user,
+                ...user.data,
                 avatar,
             });
 

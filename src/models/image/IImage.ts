@@ -1,6 +1,6 @@
 import { Document } from "mongoose";
 
-export default interface IImages extends Document {
+export default interface IImage extends Document {
     fileName?: string;
     fileType?: string;
     fileSize?: number;

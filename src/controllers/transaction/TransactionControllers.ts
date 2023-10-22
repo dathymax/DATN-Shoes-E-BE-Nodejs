@@ -32,6 +32,25 @@ class TransactionControllers {
         }
     };
 
+    getAllReturnsTransaction = async (req: Request, res: Response) => {
+        try {
+            const transactions = await this._services.getAllReturnsTransaction();
+
+            if (!transactions.data) {
+                return res
+                    .status(400)
+                    .json({ message: "Get all transaction failed!" });
+            }
+
+            return res.status(200).json(transactions).end();
+        } catch (error) {
+            console.log(error);
+            return res
+                .status(400)
+                .json({ message: "Get all transaction failed!" });
+        }
+    }
+
     getById = async (req: Request, res: Response) => {
         try {
             const { id } = req.params;
@@ -157,6 +176,30 @@ class TransactionControllers {
                 .json({ message: "Delete transaction failed!" });
         }
     };
+
+    returnTransaction = async (req: Request, res: Response) => {
+        try {
+            const { id } = req.params;
+            const { reason, imagesRoof } = req.body;
+            const transaction = await this._services.getById(id);
+
+            if (!transaction.data || transaction.status === 400) {
+                return res.status(400).json("Get transaction failed!");
+            }
+
+            const updatedTransaction = await this._services.update(id, {
+                ...transaction.data,
+                status: "returns",
+                reason,
+                imagesRoof
+            })
+
+            return res.status(200).json(updatedTransaction).end();
+        } catch (error) {
+            console.log(error);
+            return res.status(400).json({ message: "Returns transaction failed!" });
+        }
+    }
 }
 
 export default TransactionControllers;
