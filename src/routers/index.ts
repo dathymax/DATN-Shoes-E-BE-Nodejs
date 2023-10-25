@@ -8,6 +8,7 @@ import addressShipping from "./address-shipping";
 import image from "./image";
 import wishlist from "./wishlist";
 import transaction from "./transaction";
+import promoCode from "./promo-code";
 
 const router = Router();
 
@@ -21,6 +22,7 @@ export default (): Router => {
     image(router);
     wishlist(router);
     transaction(router);
+    promoCode(router);
 
     return router;
 };
