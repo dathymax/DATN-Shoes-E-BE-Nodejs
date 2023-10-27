@@ -19,6 +19,9 @@ const UserSchema = new mongoose.Schema<IUser>(
         city: { type: String, required: false },
         avatar: { type: String, required: false },
         updatedAt: { type: Date, required: false, default: Date.now },
+        promoCodes: [
+            { type: mongoose.Schema.Types.ObjectId, ref: "PromoCode" },
+        ],
     },
     { timestamps: true }
 );
@@ -43,7 +46,10 @@ const WishlistShoeSchema = new mongoose.Schema<IWishlistShoe>(
         shoeId: { type: String, required: false },
     },
     { timestamps: true }
-)
+);
 
 export const UserModel = mongoose.model("User", UserSchema);
-export const WishlistShoeModel = mongoose.model("WishlistShoe", WishlistShoeSchema);
+export const WishlistShoeModel = mongoose.model(
+    "WishlistShoe",
+    WishlistShoeSchema
+);

@@ -174,12 +174,10 @@ export default class UserControllers {
             return res.status(200).json(user).end();
         } catch (error) {
             console.log(error);
-            return res
-                .status(400)
-                .json({
-                    message:
-                        "Error from server, please wait for a moment or try again!",
-                });
+            return res.status(400).json({
+                message:
+                    "Error from server, please wait for a moment or try again!",
+            });
         }
     };
 
@@ -219,11 +217,10 @@ export default class UserControllers {
                 city,
                 role,
                 avatar,
+                promoCodes,
             } = req.body;
-            // const avatar = req?.file?.filename;
 
             const user = await this._services.getUserById(id);
-            const userModel = await UserModel.findById({ _id: id });
 
             if (!user.data) {
                 return res.sendStatus(400);
@@ -243,7 +240,7 @@ export default class UserControllers {
                 city,
                 role,
                 avatar,
-                // avatar: avatar || userModel.avatar || "",
+                promoCodes,
             });
 
             return res.status(200).json(updatedUser).end();

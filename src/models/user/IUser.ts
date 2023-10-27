@@ -1,4 +1,5 @@
 import IImage from "models/image/IImage";
+import IPromoCode from "models/promo-code/IPromoCode";
 import { Document } from "mongoose";
 
 export default interface IUser extends Document {
@@ -18,6 +19,7 @@ export default interface IUser extends Document {
     city?: string;
     avatar?: string;
     updatedAt?: Date | string;
+    promoCodes?: IPromoCode[];
 }
 
 export interface IWishlistShoe extends Document {

@@ -41,6 +41,7 @@ export const login = async (req: Request, res: Response) => {
                     username: user.username,
                     country: user.country,
                     role: user.role,
+                    promoCodes: user.promoCodes,
                 },
                 process.env.JWT_KEY,
                 {
@@ -56,12 +57,10 @@ export const login = async (req: Request, res: Response) => {
             .json({ message: "Email or password is not correct!" });
     } catch (error) {
         console.log(error);
-        return res
-            .status(400)
-            .json({
-                message:
-                    "Error from server, please wait for a moment or try again!",
-            });
+        return res.status(400).json({
+            message:
+                "Error from server, please wait for a moment or try again!",
+        });
     }
 };
 
@@ -186,5 +185,5 @@ export const forgotPassword = async (req: Request, res: Response) => {
             }
         });
         console.log(link);
-    } catch (error) { }
+    } catch (error) {}
 };
