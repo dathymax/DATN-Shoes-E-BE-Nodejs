@@ -2,14 +2,17 @@ import IPromoCode from "../../models/promo-code/IPromoCode";
 import IPromoCodeServices from "./IPromoCodeServices";
 import { IResponseEntity } from "../../common/IResponseEntity";
 import { PromoCodeModel } from "../../models/promo-code/PromoCodeModel";
+import { mapPromoCodes } from "../../mapper/promo-code";
 
 class PromoCodeServices implements IPromoCodeServices<IPromoCode> {
     getAll = async (): Promise<IResponseEntity<IPromoCode>> => {
         try {
             const promoCodes = await PromoCodeModel.find();
 
+            const updatedPromoCodes = mapPromoCodes(promoCodes);
+
             return {
-                data: promoCodes,
+                data: updatedPromoCodes,
                 status: 200,
                 message: "Get all promo code success!",
             };

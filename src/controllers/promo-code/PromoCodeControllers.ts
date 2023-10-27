@@ -67,9 +67,13 @@ class PromoCodeControllers {
 
     create = async (req: Request, res: Response) => {
         try {
-            const { name } = req.body;
+            const { name, spendTime } = req.body;
             const promoCode = await this._services.create({
                 name,
+                spendTime,
+                isExpired: false,
+                createDate: new Date(),
+                modifiedDate: new Date(),
             });
 
             if (!promoCode.data) {
@@ -90,8 +94,12 @@ class PromoCodeControllers {
     update = async (req: Request, res: Response) => {
         try {
             const { id } = req.params;
-            const { name } = req.body;
-            const promoCode = await this._services.update(id, { name });
+            const { name, spendTime } = req.body;
+            const promoCode = await this._services.update(id, {
+                name,
+                spendTime,
+                modifiedDate: new Date(),
+            });
 
             if (!promoCode.data) {
                 return res
