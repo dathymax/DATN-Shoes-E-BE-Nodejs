@@ -65,8 +65,7 @@ class TransactionServices implements ITransactionServices<ITransaction> {
     getById = async (id: string): Promise<IResponseEntity<ITransaction>> => {
         try {
             const transaction = await TransactionModel.findById(id).populate
-            "purchasedProducts"
-                ;
+                ("purchasedProducts");
 
             if (!transaction) {
                 return {
