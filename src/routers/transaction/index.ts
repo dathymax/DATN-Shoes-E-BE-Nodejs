@@ -25,6 +25,7 @@ export default (router: Router) => {
         checkAuthentication,
         transactionControllers.create
     );
+    router.post("/transactions", checkAuthentication, transactionControllers.create)
     router.patch(
         "/transactions/:id/:transactionExt",
         checkAuthentication,

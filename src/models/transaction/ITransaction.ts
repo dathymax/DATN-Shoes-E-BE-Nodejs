@@ -1,3 +1,4 @@
+import IPromoCode from "models/promo-code/IPromoCode";
 import IImage from "../../models/image/IImage";
 import IPurchasedProduct from "../../models/purchased-product/IPurchasedProduct";
 import { Document } from "mongoose";
@@ -13,10 +14,10 @@ export default interface ITransaction extends Document {
     address?: string;
     payment?: string;
     purchasedProducts?: IPurchasedProduct[];
-    discount?: string;
+    discount?: IPromoCode;
     shipping?: string | number;
     tax?: string | number;
     subTotal?: string | number;
     reason?: string,
-    imagesRoof?: IImage[]
+    imagesRoof?: IImage[],
 }
