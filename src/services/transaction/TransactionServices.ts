@@ -98,8 +98,10 @@ class TransactionServices implements ITransactionServices<ITransaction> {
 
             await transaction.save();
 
+            const data = await transaction.populate("purchasedProducts");
+
             return {
-                data: transaction,
+                data: data,
                 status: 200,
                 message: "Get transaction success!",
             };

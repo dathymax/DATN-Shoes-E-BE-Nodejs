@@ -20,6 +20,7 @@ const TransactionSchema = new mongoose.Schema<ITransaction>({
     ],
     reason: { type: String, required: false },
     imagesRoof: [{ type: mongoose.Schema.Types.ObjectId, ref: "Image" }],
+    extCode: { type: String, required: false },
 });
 
 export const TransactionModel = mongoose.model(

@@ -80,6 +80,7 @@ class TransactionControllers {
                 subTotal,
                 shipping,
                 discount,
+                extCode,
                 purchasedProducts,
             } = req.body;
 
@@ -97,10 +98,14 @@ class TransactionControllers {
                 subTotal,
                 shipping,
                 discount,
+                extCode
             });
-            const products = await purchasedProducts.map(
+            const products = await purchasedProducts.forEach(
                 (purchasedProduct: IPurchasedProduct) =>
-                    this._purchasedServices.create(purchasedProduct)
+                    this._purchasedServices.create({
+                        ...purchasedProduct,
+                        extCode
+                    })
             );
 
             const response = {
@@ -119,7 +124,7 @@ class TransactionControllers {
 
     update = async (req: Request, res: Response) => {
         try {
-            const { id, transactionExt } = req.params;
+            const { id, extCode } = req.params;
             const { phoneNumber, status, address, payment, purchasedProducts } =
                 req.body;
             const transaction = await this._services.update(id, {
@@ -132,7 +137,7 @@ class TransactionControllers {
             const products = await purchasedProducts.map(
                 (purchasedProduct: IPurchasedProduct) =>
                     this._purchasedServices.updateByTransactionExt(
-                        transactionExt,
+                        extCode,
                         purchasedProduct
                     )
             );
@@ -153,10 +158,10 @@ class TransactionControllers {
 
     delete = async (req: Request, res: Response) => {
         try {
-            const { id, transactionExt } = req.params;
+            const { id, extCode } = req.params;
             const deletedTransaction = await this._services.delete(id);
             await this._purchasedServices.deleteByTransactionExt(
-                transactionExt
+                extCode
             );
 
             if (deletedTransaction.status !== 200) {

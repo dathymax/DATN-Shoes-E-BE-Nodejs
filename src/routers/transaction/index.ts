@@ -27,12 +27,12 @@ export default (router: Router) => {
     );
     router.post("/transactions", checkAuthentication, transactionControllers.create)
     router.patch(
-        "/transactions/:id/:transactionExt",
+        "/transactions/:id/:extCode",
         checkAuthentication,
         transactionControllers.update
     );
     router.delete(
-        "/transaction/:id/:transactionExt",
+        "/transactions/:id/:extCode",
         checkAuthentication,
         transactionControllers.delete
     );

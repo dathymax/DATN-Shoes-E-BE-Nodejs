@@ -63,11 +63,11 @@ class PurchasedProductServices
     };
 
     getAllByTransactionId = async (
-        transactionExt: string
+        extCode: string
     ): Promise<IResponseEntity<IPurchasedProduct>> => {
         try {
             const products = await PurchasedProductModel.findOne({
-                transactionExt,
+                extCode,
             });
 
             if (!products) {
@@ -143,11 +143,11 @@ class PurchasedProductServices
     };
 
     deleteByTransactionExt = async (
-        transactionExt: string
+        extCode: string
     ): Promise<IResponseEntity<IPurchasedProduct>> => {
         try {
             const deletedItems = await PurchasedProductModel.deleteMany({
-                transactionExt,
+                extCode,
             });
 
             console.log(deletedItems);
@@ -168,13 +168,13 @@ class PurchasedProductServices
     };
 
     updateByTransactionExt = async (
-        transactionExt: string,
+        extCode: string,
         values: Record<string, any>
     ): Promise<IResponseEntity<IPurchasedProduct>> => {
         try {
             const purchasedProduct =
                 await PurchasedProductModel.findOneAndUpdate(
-                    { transactionExt },
+                    { extCode },
                     values,
                     { new: true }
                 );

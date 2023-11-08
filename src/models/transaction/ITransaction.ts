@@ -20,4 +20,5 @@ export default interface ITransaction extends Document {
     subTotal?: string | number;
     reason?: string,
     imagesRoof?: IImage[],
+    extCode?: string;
 }

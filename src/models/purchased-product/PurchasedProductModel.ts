@@ -11,7 +11,7 @@ const PurchasedProductSchema = new mongoose.Schema<IPurchasedProduct>({
     quantity: { type: Number, required: false },
     price: { type: Number, required: false },
     total: { type: Number, required: false },
-    transactionExt: { type: String, required: false },
+    extCode: { type: String, required: false },
 });
 
 export const PurchasedProductModel = mongoose.model(

@@ -10,5 +10,5 @@ export default interface IPurchasedProduct extends Document {
     quantity?: number;
     price?: number | string;
     total?: number | string;
-    transactionExt?: string;
+    extCode?: string;
 }

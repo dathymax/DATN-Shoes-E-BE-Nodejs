@@ -6,13 +6,13 @@ export default interface IPurchasedProductServices<T> {
     create?: (values: T) => Promise<IResponseEntity<T>>;
     update?: (id: string, values: T) => Promise<IResponseEntity<T>>;
     deleteByTransactionExt?: (
-        transactionExt: string
+        extCode: string
     ) => Promise<IResponseEntity<T>>;
     getAllByTransactionId?: (
-        transactionExt: string
+        extCode: string
     ) => Promise<IResponseEntity<T>>;
     updateByTransactionExt?: (
-        transactionExt: string,
+        extCode: string,
         values: T
     ) => Promise<IResponseEntity<T>>;
 }
