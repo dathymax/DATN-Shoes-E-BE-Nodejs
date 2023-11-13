@@ -31,6 +31,7 @@ export default (router: Router) => {
         checkAuthentication,
         transactionControllers.update
     );
+    router.patch("/transactions/:id", checkAuthentication, transactionControllers.updateById);
     router.delete(
         "/transactions/:id/:extCode",
         checkAuthentication,

@@ -156,6 +156,28 @@ class TransactionControllers {
         }
     };
 
+    updateById = async (req: Request, res: Response) => {
+        try {
+            const { id } = req.params;
+            const { phoneNumber, status, address, payment, purchasedProducts } =
+                req.body;
+            const transaction = await this._services.update(id, {
+                date: new Date(),
+                phoneNumber,
+                status,
+                address,
+                payment,
+            });
+
+            return res.status(200).json(transaction).end();
+        } catch (error) {
+            console.log(error);
+            return res
+                .status(400)
+                .json({ message: "Update transaction failed!" });
+        }
+    };
+
     delete = async (req: Request, res: Response) => {
         try {
             const { id, extCode } = req.params;
