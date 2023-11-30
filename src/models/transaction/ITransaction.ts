@@ -21,4 +21,5 @@ export default interface ITransaction extends Document {
     reason?: string,
     imagesRoof?: IImage[],
     extCode?: string;
+    userId?: string;
 }

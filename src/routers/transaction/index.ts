@@ -37,4 +37,6 @@ export default (router: Router) => {
         checkAuthentication,
         transactionControllers.delete
     );
+    router.get("/transactions/:userId", checkAuthentication, transactionControllers.getAllByUserId);
+    router.get("/transactions/returns/:userId", checkAuthentication, transactionControllers.getAllReturnsTransactionByUserId);
 };
