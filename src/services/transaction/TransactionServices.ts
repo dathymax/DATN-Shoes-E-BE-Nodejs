@@ -33,6 +33,35 @@ class TransactionServices implements ITransactionServices<ITransaction> {
         }
     };
 
+    getAllByUserId = async (userId: string): Promise<IResponseEntity<ITransaction>> => {
+        try {
+            const transactions = await TransactionModel.find({ userId }).populate(
+                "purchasedProducts"
+            );
+
+            if (!transactions) {
+                return {
+                    data: null,
+                    status: 400,
+                    message: "Get all transaction failed!",
+                };
+            }
+
+            return {
+                data: transactions,
+                status: 200,
+                message: "Get all transaction success!",
+            };
+        } catch (error) {
+            console.log(error);
+            return {
+                data: null,
+                status: 400,
+                message: "Get all transaction failed!",
+            }
+        }
+    };
+
     getAllReturnsTransaction = async (): Promise<IResponseEntity<ITransaction>> => {
         try {
             const transactions = await TransactionModel.find({ status: "returns" }).populate(
@@ -61,6 +90,35 @@ class TransactionServices implements ITransactionServices<ITransaction> {
             };
         }
     };
+
+    getAllReturnsTransactionByUserId = async (userId: string): Promise<IResponseEntity<ITransaction>> => {
+        try {
+            const transactions = await TransactionModel.find({ userId }).populate(
+                "purchasedProducts"
+            );
+
+            if (!transactions) {
+                return {
+                    data: null,
+                    status: 400,
+                    message: "Get all returns transaction failed!",
+                };
+            }
+
+            return {
+                data: transactions,
+                status: 200,
+                message: "Get all returns transaction success!",
+            };
+        } catch (error) {
+            console.log(error);
+            return {
+                data: null,
+                status: 400,
+                message: "Get all transaction failed!",
+            };
+        }
+    }
 
     getById = async (id: string): Promise<IResponseEntity<ITransaction>> => {
         try {

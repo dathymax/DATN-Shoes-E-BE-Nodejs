@@ -32,9 +32,51 @@ class TransactionControllers {
         }
     };
 
+    getAllByUserId = async (req: Request, res: Response) => {
+        try {
+            const { userId } = req.params;
+            const transactions = await this._services.getAllByUserId(userId);
+
+            console.log(transactions);
+
+            if (!transactions.data) {
+                return res
+                    .status(400)
+                    .json({ message: "Get all transaction failed!" });
+            }
+
+            return res.status(200).json(transactions).end();
+        } catch (error) {
+            console.log(error);
+            return res
+                .status(400)
+                .json({ message: "Get all transaction failed!" });
+        }
+    }
+
     getAllReturnsTransaction = async (req: Request, res: Response) => {
         try {
             const transactions = await this._services.getAllReturnsTransaction();
+
+            if (!transactions.data) {
+                return res
+                    .status(400)
+                    .json({ message: "Get all transaction failed!" });
+            }
+
+            return res.status(200).json(transactions).end();
+        } catch (error) {
+            console.log(error);
+            return res
+                .status(400)
+                .json({ message: "Get all transaction failed!" });
+        }
+    }
+
+    getAllReturnsTransactionByUserId = async (req: Request, res: Response) => {
+        try {
+            const { userId } = req.params;
+            const transactions = await this._services.getAllReturnsTransactionByUserId(userId);
 
             if (!transactions.data) {
                 return res
@@ -82,6 +124,7 @@ class TransactionControllers {
                 discount,
                 extCode,
                 purchasedProducts,
+                userId
             } = req.body;
 
             const transaction = await this._services.create({
@@ -98,7 +141,8 @@ class TransactionControllers {
                 subTotal,
                 shipping,
                 discount,
-                extCode
+                extCode,
+                userId
             });
             const products = await purchasedProducts.forEach(
                 (purchasedProduct: IPurchasedProduct) =>
@@ -148,6 +192,28 @@ class TransactionControllers {
             };
 
             return res.status(200).json(response).end();
+        } catch (error) {
+            console.log(error);
+            return res
+                .status(400)
+                .json({ message: "Update transaction failed!" });
+        }
+    };
+
+    updateById = async (req: Request, res: Response) => {
+        try {
+            const { id } = req.params;
+            const { phoneNumber, status, address, payment, purchasedProducts } =
+                req.body;
+            const transaction = await this._services.update(id, {
+                date: new Date(),
+                phoneNumber,
+                status,
+                address,
+                payment,
+            });
+
+            return res.status(200).json(transaction).end();
         } catch (error) {
             console.log(error);
             return res

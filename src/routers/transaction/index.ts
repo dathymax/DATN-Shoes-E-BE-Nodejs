@@ -31,9 +31,12 @@ export default (router: Router) => {
         checkAuthentication,
         transactionControllers.update
     );
+    router.patch("/transactions/:id", checkAuthentication, transactionControllers.updateById);
     router.delete(
         "/transactions/:id/:extCode",
         checkAuthentication,
         transactionControllers.delete
     );
+    router.get("/transactions/:userId", checkAuthentication, transactionControllers.getAllByUserId);
+    router.get("/transactions/returns/:userId", checkAuthentication, transactionControllers.getAllReturnsTransactionByUserId);
 };

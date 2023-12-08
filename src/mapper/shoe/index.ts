@@ -1,4 +1,4 @@
-import { IWishlistShoe } from "models/user/IUser";
+import { IWishlistShoe } from "../../models/user/IUser";
 import { countDays } from "../../helpers";
 import IShoe from "../../models/shoe/IShoe";
 
