@@ -6,7 +6,7 @@ export default interface IPurchasedProduct extends Document {
     category?: string;
     sku?: string;
     size?: string;
-    image?: IImage;
+    image?: string;
     color?: string;
     quantity?: number;
     price?: number | string;
