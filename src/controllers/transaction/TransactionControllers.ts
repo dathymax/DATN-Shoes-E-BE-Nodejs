@@ -3,6 +3,7 @@ import IPurchasedProduct from "../../models/purchased-product/IPurchasedProduct"
 import PurchasedProductServices from "../../services/purchased-product/PurchasedProductServices";
 import TransactionServices from "../../services/transaction/TransactionServices";
 import { v4 } from "uuid";
+import { PurchasedProductModel } from "../../models/purchased-product/PurchasedProductModel";
 
 class TransactionControllers {
     _services: TransactionServices;
@@ -52,11 +53,12 @@ class TransactionControllers {
                 .status(400)
                 .json({ message: "Get all transaction failed!" });
         }
-    }
+    };
 
     getAllReturnsTransaction = async (req: Request, res: Response) => {
         try {
-            const transactions = await this._services.getAllReturnsTransaction();
+            const transactions =
+                await this._services.getAllReturnsTransaction();
 
             if (!transactions.data) {
                 return res
@@ -71,12 +73,13 @@ class TransactionControllers {
                 .status(400)
                 .json({ message: "Get all transaction failed!" });
         }
-    }
+    };
 
     getAllReturnsTransactionByUserId = async (req: Request, res: Response) => {
         try {
             const { userId } = req.params;
-            const transactions = await this._services.getAllReturnsTransactionByUserId(userId);
+            const transactions =
+                await this._services.getAllReturnsTransactionByUserId(userId);
 
             if (!transactions.data) {
                 return res
@@ -91,7 +94,7 @@ class TransactionControllers {
                 .status(400)
                 .json({ message: "Get all transaction failed!" });
         }
-    }
+    };
 
     getById = async (req: Request, res: Response) => {
         try {
@@ -124,40 +127,31 @@ class TransactionControllers {
                 discount,
                 extCode,
                 purchasedProducts,
-                userId
+                userId,
             } = req.body;
 
-            const transaction = await this._services.create({
-                transactionNumber: v4(),
-                date: new Date(),
-                invoice: `INV/${v4()}`,
-                customerName,
-                phoneNumber,
-                status: "process",
-                receiptNumber: v4(),
-                address,
-                payment,
-                tax,
-                subTotal,
-                shipping,
-                discount,
-                extCode,
-                userId
-            });
-            const products = await purchasedProducts.forEach(
-                (purchasedProduct: IPurchasedProduct) =>
-                    this._purchasedServices.create({
-                        ...purchasedProduct,
-                        extCode
-                    })
+            const transaction = await this._services.create(
+                {
+                    transactionNumber: v4(),
+                    date: new Date(),
+                    invoice: `INV/${v4()}`,
+                    customerName,
+                    phoneNumber,
+                    status: "process",
+                    receiptNumber: v4(),
+                    address,
+                    payment,
+                    tax,
+                    subTotal,
+                    shipping,
+                    discount,
+                    extCode,
+                    userId,
+                },
+                purchasedProducts
             );
 
-            const response = {
-                ...transaction,
-                purchasedProducts: products,
-            };
-
-            return res.status(200).json(response).end();
+            return res.status(200).json(transaction).end();
         } catch (error) {
             console.log(error);
             return res
@@ -226,9 +220,7 @@ class TransactionControllers {
         try {
             const { id, extCode } = req.params;
             const deletedTransaction = await this._services.delete(id);
-            await this._purchasedServices.deleteByTransactionExt(
-                extCode
-            );
+            await this._purchasedServices.deleteByTransactionExt(extCode);
 
             if (deletedTransaction.status !== 200) {
                 return res
@@ -262,15 +254,17 @@ class TransactionControllers {
                 ...transaction.data,
                 status: "returns",
                 reason,
-                imagesRoof
-            })
+                imagesRoof,
+            });
 
             return res.status(200).json(updatedTransaction).end();
         } catch (error) {
             console.log(error);
-            return res.status(400).json({ message: "Returns transaction failed!" });
+            return res
+                .status(400)
+                .json({ message: "Returns transaction failed!" });
         }
-    }
+    };
 }
 
 export default TransactionControllers;

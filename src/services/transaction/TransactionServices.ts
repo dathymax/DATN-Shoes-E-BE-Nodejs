@@ -2,6 +2,8 @@ import ITransaction from "../../models/transaction/ITransaction";
 import ITransactionServices from "./ITransactionServices";
 import { IResponseEntity } from "../../common/IResponseEntity";
 import { TransactionModel } from "../../models/transaction/TransactionModel";
+import IPurchasedProduct from "../../models/purchased-product/IPurchasedProduct";
+import { PurchasedProductModel } from "../../models/purchased-product/PurchasedProductModel";
 
 class TransactionServices implements ITransactionServices<ITransaction> {
     getAll = async (): Promise<IResponseEntity<ITransaction>> => {
@@ -33,11 +35,13 @@ class TransactionServices implements ITransactionServices<ITransaction> {
         }
     };
 
-    getAllByUserId = async (userId: string): Promise<IResponseEntity<ITransaction>> => {
+    getAllByUserId = async (
+        userId: string
+    ): Promise<IResponseEntity<ITransaction>> => {
         try {
-            const transactions = await TransactionModel.find({ userId }).populate(
-                "purchasedProducts"
-            );
+            const transactions = await TransactionModel.find({
+                userId,
+            }).populate("purchasedProducts");
 
             if (!transactions) {
                 return {
@@ -58,15 +62,17 @@ class TransactionServices implements ITransactionServices<ITransaction> {
                 data: null,
                 status: 400,
                 message: "Get all transaction failed!",
-            }
+            };
         }
     };
 
-    getAllReturnsTransaction = async (): Promise<IResponseEntity<ITransaction>> => {
+    getAllReturnsTransaction = async (): Promise<
+        IResponseEntity<ITransaction>
+    > => {
         try {
-            const transactions = await TransactionModel.find({ status: "returns" }).populate(
-                "purchasedProducts"
-            );
+            const transactions = await TransactionModel.find({
+                status: "returns",
+            }).populate("purchasedProducts");
 
             if (!transactions) {
                 return {
@@ -91,11 +97,13 @@ class TransactionServices implements ITransactionServices<ITransaction> {
         }
     };
 
-    getAllReturnsTransactionByUserId = async (userId: string): Promise<IResponseEntity<ITransaction>> => {
+    getAllReturnsTransactionByUserId = async (
+        userId: string
+    ): Promise<IResponseEntity<ITransaction>> => {
         try {
-            const transactions = await TransactionModel.find({ userId }).populate(
-                "purchasedProducts"
-            );
+            const transactions = await TransactionModel.find({
+                userId,
+            }).populate("purchasedProducts");
 
             if (!transactions) {
                 return {
@@ -118,12 +126,13 @@ class TransactionServices implements ITransactionServices<ITransaction> {
                 message: "Get all transaction failed!",
             };
         }
-    }
+    };
 
     getById = async (id: string): Promise<IResponseEntity<ITransaction>> => {
         try {
-            const transaction = await TransactionModel.findById(id).populate
-                ("purchasedProducts");
+            const transaction = await TransactionModel.findById(id).populate(
+                "purchasedProducts"
+            );
 
             if (!transaction) {
                 return {
@@ -149,17 +158,25 @@ class TransactionServices implements ITransactionServices<ITransaction> {
     };
 
     create = async (
-        values: Record<string, any>
+        values: Record<string, any>,
+        purchasedProducts: IPurchasedProduct[]
     ): Promise<IResponseEntity<ITransaction>> => {
         try {
             const transaction = new TransactionModel(values);
 
-            await transaction.save();
+            const savedTransaction = await transaction.save();
 
-            const data = await transaction.populate("purchasedProducts");
+            const savedPurchasedProduct =
+                await PurchasedProductModel.insertMany(purchasedProducts);
+
+            savedTransaction.purchasedProducts = savedPurchasedProduct.map(
+                (product) => product?._id
+            );
+
+            await savedTransaction.save();
 
             return {
-                data: data,
+                data: savedTransaction,
                 status: 200,
                 message: "Get transaction success!",
             };
