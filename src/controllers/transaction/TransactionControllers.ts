@@ -3,7 +3,6 @@ import IPurchasedProduct from "../../models/purchased-product/IPurchasedProduct"
 import PurchasedProductServices from "../../services/purchased-product/PurchasedProductServices";
 import TransactionServices from "../../services/transaction/TransactionServices";
 import { v4 } from "uuid";
-import { PurchasedProductModel } from "../../models/purchased-product/PurchasedProductModel";
 
 class TransactionControllers {
     _services: TransactionServices;

@@ -8,7 +8,9 @@ class PurchasedProductServices
 {
     getAll = async (): Promise<IResponseEntity<IPurchasedProduct>> => {
         try {
-            const products = await PurchasedProductModel.find();
+            const products = await PurchasedProductModel.find().populate(
+                "images"
+            );
 
             if (!products) {
                 return {
@@ -37,7 +39,9 @@ class PurchasedProductServices
         id: string
     ): Promise<IResponseEntity<IPurchasedProduct>> => {
         try {
-            const product = await PurchasedProductModel.findById(id);
+            const product = await PurchasedProductModel.findById(id).populate(
+                "images"
+            );
 
             if (!product) {
                 return {
@@ -68,7 +72,7 @@ class PurchasedProductServices
         try {
             const products = await PurchasedProductModel.findOne({
                 extCode,
-            });
+            }).populate("images");
 
             if (!products) {
                 return {
