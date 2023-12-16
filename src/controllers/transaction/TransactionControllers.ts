@@ -37,8 +37,6 @@ class TransactionControllers {
             const { userId } = req.params;
             const transactions = await this._services.getAllByUserId(userId);
 
-            console.log(transactions);
-
             if (!transactions.data) {
                 return res
                     .status(400)
