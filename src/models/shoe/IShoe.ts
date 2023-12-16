@@ -1,16 +1,18 @@
-import IImage from "models/image/IImage";
+import IImage from "../../models/image/IImage";
 import { Document } from "mongoose";
+import IColor from "../color/IColor";
 
 export default interface IShoe extends Document {
     name?: string;
     rate?: number;
     shoeType?: string;
-    color?: string;
+    colors?: string[];
     size?: number;
     price?: number;
     description?: string;
     category?: string;
     status?: string;
+    quantity?: number | string;
     discountType?: string;
     setDiscount?: string;
     images?: IImage[];

@@ -9,6 +9,8 @@ import image from "./image";
 import wishlist from "./wishlist";
 import transaction from "./transaction";
 import promoCode from "./promo-code";
+import color from "./color";
+import size from "./size";
 
 const router = Router();
 
@@ -23,6 +25,8 @@ export default (): Router => {
     wishlist(router);
     transaction(router);
     promoCode(router);
+    color(router);
+    size(router);
 
     return router;
 };

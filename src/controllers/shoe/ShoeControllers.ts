@@ -46,7 +46,7 @@ export default class ShoeControllers {
                 name,
                 rate,
                 shoeType,
-                color,
+                colors,
                 price,
                 size,
                 description,
@@ -55,6 +55,7 @@ export default class ShoeControllers {
                 discountType,
                 setDiscount,
                 images,
+                quantity,
             } = req.body;
 
             if (!name) {
@@ -65,7 +66,7 @@ export default class ShoeControllers {
                 name,
                 rate,
                 shoeType,
-                color,
+                colors,
                 price,
                 size,
                 description,
@@ -74,7 +75,8 @@ export default class ShoeControllers {
                 discountType,
                 setDiscount,
                 images,
-                createDate: new Date()
+                quantity,
+                createDate: new Date(),
             });
 
             return res.status(200).json(shoe).end();
@@ -112,13 +114,14 @@ export default class ShoeControllers {
                 price,
                 rate,
                 shoeType,
-                color,
+                colors,
                 description,
                 category,
                 status,
                 discountType,
                 setDiscount,
                 images,
+                quantity,
             } = req.body;
 
             if (!name) {
@@ -131,13 +134,14 @@ export default class ShoeControllers {
                 price,
                 rate,
                 shoeType,
-                color,
+                colors,
                 description,
                 category,
                 status,
                 discountType,
                 setDiscount,
                 images,
+                quantity,
             });
 
             return res.status(200).json(shoe).end();
