@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import IPurchasedProduct from "./IPurchasedProduct";
 
 const PurchasedProductSchema = new mongoose.Schema<IPurchasedProduct>({
+    productId: { type: String, required: true },
     name: { type: String, required: true },
     category: { type: String, required: false },
     sku: { type: String, required: false },

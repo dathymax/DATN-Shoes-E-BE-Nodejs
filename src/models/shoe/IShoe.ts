@@ -1,6 +1,5 @@
 import IImage from "../../models/image/IImage";
 import { Document } from "mongoose";
-import IColor from "../color/IColor";
 
 export default interface IShoe extends Document {
     name?: string;
@@ -17,4 +16,5 @@ export default interface IShoe extends Document {
     setDiscount?: string;
     images?: IImage[];
     createDate?: Date;
+    isSoldOut?: boolean;
 }

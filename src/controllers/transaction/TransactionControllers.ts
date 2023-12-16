@@ -3,19 +3,41 @@ import IPurchasedProduct from "../../models/purchased-product/IPurchasedProduct"
 import PurchasedProductServices from "../../services/purchased-product/PurchasedProductServices";
 import TransactionServices from "../../services/transaction/TransactionServices";
 import { v4 } from "uuid";
+import TransactionInstanceServices from "../../services/transaction/TransactionInstanceServices";
 
 class TransactionControllers {
     _services: TransactionServices;
+    _servicesInstance: TransactionInstanceServices;
     _purchasedServices: PurchasedProductServices;
 
     constructor() {
         this._services = new TransactionServices();
         this._purchasedServices = new PurchasedProductServices();
+        this._servicesInstance = new TransactionInstanceServices();
     }
 
     getAll = async (req: Request, res: Response) => {
         try {
             const transactions = await this._services.getAll();
+
+            if (!transactions.data) {
+                return res
+                    .status(400)
+                    .json({ message: "Get all transaction failed!" });
+            }
+
+            return res.status(200).json(transactions).end();
+        } catch (error) {
+            console.log(error);
+            return res
+                .status(400)
+                .json({ message: "Get all transaction failed!" });
+        }
+    };
+
+    getAllInstance = async (req: Request, res: Response) => {
+        try {
+            const transactions = await this._servicesInstance.getAll();
 
             if (!transactions.data) {
                 return res

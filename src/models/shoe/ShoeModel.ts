@@ -3,10 +3,10 @@ import IShoe from "./IShoe";
 
 const ShoeSchema = new mongoose.Schema<IShoe>(
     {
-        name: { type: String, required: true },
+        name: { type: String, required: false },
         rate: { type: Number, required: false },
         shoeType: { type: String, required: false },
-        colors: { type: String, required: true },
+        colors: { type: String, required: false },
         sizes: { type: Number, required: false },
         price: { type: Number, required: false },
         description: { type: String, required: false },
@@ -16,7 +16,8 @@ const ShoeSchema = new mongoose.Schema<IShoe>(
         setDiscount: { type: String, required: false },
         images: [{ type: mongoose.Schema.Types.ObjectId, ref: "Image" }],
         createDate: { type: Date, required: false },
-        quantity: { type: Number, required: true },
+        quantity: { type: Number, required: false },
+        isSoldOut: { type: Boolean, required: false },
     },
     { timestamps: true }
 );

@@ -25,18 +25,39 @@ export default (router: Router) => {
         checkAuthentication,
         transactionControllers.create
     );
-    router.post("/transactions", checkAuthentication, transactionControllers.create)
+    router.post(
+        "/transactions",
+        checkAuthentication,
+        transactionControllers.create
+    );
     router.patch(
         "/transactions/:id/:extCode",
         checkAuthentication,
         transactionControllers.update
     );
-    router.patch("/transactions/:id", checkAuthentication, transactionControllers.updateById);
+    router.patch(
+        "/transactions/:id",
+        checkAuthentication,
+        transactionControllers.updateById
+    );
     router.delete(
         "/transactions/:id/:extCode",
         checkAuthentication,
         transactionControllers.delete
     );
-    router.get("/transactions/:userId", checkAuthentication, transactionControllers.getAllByUserId);
-    router.get("/transactions/returns/:userId", checkAuthentication, transactionControllers.getAllReturnsTransactionByUserId);
+    router.get(
+        "/transactions-instance",
+        checkAuthentication,
+        transactionControllers.getAllInstance
+    );
+    router.get(
+        "/transactions/:userId",
+        checkAuthentication,
+        transactionControllers.getAllByUserId
+    );
+    router.get(
+        "/transactions/returns/:userId",
+        checkAuthentication,
+        transactionControllers.getAllReturnsTransactionByUserId
+    );
 };

@@ -2,6 +2,7 @@ import { Document } from "mongoose";
 import IImage from "../image/IImage";
 
 export default interface IPurchasedProduct extends Document {
+    productId?: string;
     name?: string;
     category?: string;
     sku?: string;

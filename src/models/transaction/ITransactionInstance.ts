@@ -2,7 +2,7 @@ import IImage from "../../models/image/IImage";
 import IPurchasedProduct from "../../models/purchased-product/IPurchasedProduct";
 import { Document } from "mongoose";
 
-export default interface ITransaction extends Document {
+export default interface ITransactionInstance extends Document {
     transactionNumber?: number | string;
     date?: Date | string;
     invoice?: string;

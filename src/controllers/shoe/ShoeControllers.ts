@@ -124,10 +124,6 @@ export default class ShoeControllers {
                 quantity,
             } = req.body;
 
-            if (!name) {
-                return res.sendStatus(400);
-            }
-
             const shoe = await this._services.updateShoeById(id, {
                 name,
                 sizes,

@@ -5,7 +5,8 @@ import IShoe from "../../models/shoe/IShoe";
 export const mapShoesToUpdated = (shoes: IShoe[]): IShoe[] => {
     return shoes.map((shoe) => {
         const isNew = countDays(new Date(shoe.createDate), new Date()) <= 5;
-        return { ...shoe.toObject(), isNew } as IShoe;
+        const isSoldOut = shoe.quantity === 0;
+        return { ...shoe.toObject(), isNew, isSoldOut } as IShoe;
     });
 };
 

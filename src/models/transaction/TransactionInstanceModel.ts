@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import ITransaction from "./ITransaction";
 
-const TransactionSchema = new mongoose.Schema<ITransaction>({
+const TransactionInstanceSchema = new mongoose.Schema<ITransaction>({
     transactionNumber: { type: String, required: false },
     date: { type: String, required: false },
     invoice: { type: String, required: false },
@@ -24,7 +24,7 @@ const TransactionSchema = new mongoose.Schema<ITransaction>({
     userId: { type: String, required: false },
 });
 
-export const TransactionModel = mongoose.model(
-    "Transaction",
-    TransactionSchema
+export const TransactionInstanceModel = mongoose.model(
+    "TransactionInstance",
+    TransactionInstanceSchema
 );

@@ -4,6 +4,8 @@ import { IResponseEntity } from "../../common/IResponseEntity";
 import { TransactionModel } from "../../models/transaction/TransactionModel";
 import IPurchasedProduct from "../../models/purchased-product/IPurchasedProduct";
 import { PurchasedProductModel } from "../../models/purchased-product/PurchasedProductModel";
+import { TransactionInstanceModel } from "../../models/transaction/TransactionInstanceModel";
+import { ShoeModel } from "../../models/shoe/ShoeModel";
 
 class TransactionServices implements ITransactionServices<ITransaction> {
     getAll = async (): Promise<IResponseEntity<ITransaction>> => {
@@ -163,17 +165,33 @@ class TransactionServices implements ITransactionServices<ITransaction> {
     ): Promise<IResponseEntity<ITransaction>> => {
         try {
             const transaction = new TransactionModel(values);
+            const transactionInstance = new TransactionInstanceModel(values);
 
             const savedTransaction = await transaction.save();
+            const savedTransactionInstance = await transactionInstance.save();
 
             const savedPurchasedProduct =
                 await PurchasedProductModel.insertMany(purchasedProducts);
 
+            // const products = await ShoeModel.find();
+
+            // purchasedProducts?.forEach((item1) => {
+            //     const matchingItem2 = products.find(
+            //         (item2) => item2._id === item1.productId
+            //     );
+            //     if (matchingItem2) {
+            //         matchingItem2.quantity;
+            //     }
+            // });
+
             savedTransaction.purchasedProducts = savedPurchasedProduct.map(
                 (product) => product?._id
             );
+            savedTransactionInstance.purchasedProducts =
+                savedPurchasedProduct.map((product) => product?._id);
 
             await savedTransaction.save();
+            await savedTransactionInstance.save();
 
             return {
                 data: savedTransaction,
