@@ -48,7 +48,7 @@ export default class ShoeControllers {
                 shoeType,
                 colors,
                 price,
-                size,
+                sizes,
                 description,
                 category,
                 status,
@@ -68,7 +68,7 @@ export default class ShoeControllers {
                 shoeType,
                 colors,
                 price,
-                size,
+                sizes,
                 description,
                 category,
                 status,
@@ -110,7 +110,7 @@ export default class ShoeControllers {
             const { id } = req.params;
             const {
                 name,
-                size,
+                sizes,
                 price,
                 rate,
                 shoeType,
@@ -130,7 +130,7 @@ export default class ShoeControllers {
 
             const shoe = await this._services.updateShoeById(id, {
                 name,
-                size,
+                sizes,
                 price,
                 rate,
                 shoeType,

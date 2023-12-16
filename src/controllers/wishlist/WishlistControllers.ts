@@ -15,14 +15,16 @@ class WishlistControllers {
             const shoeFound = await ShoeModel.findById(shoeId);
 
             if (!shoeId || !userId || !shoeFound) {
-                return res.status(400).json({ message: "Create wishlist failed!" });
+                return res
+                    .status(400)
+                    .json({ message: "Create wishlist failed!" });
             }
 
             const shoe = await this._services.addWishlistByUserId({
                 userId,
                 shoeId: shoeFound._id,
                 name: shoeFound.name,
-                size: shoeFound.size,
+                sizes: shoeFound.sizes,
                 price: shoeFound.price,
                 description: shoeFound.description,
                 category: shoeFound.category,
@@ -31,11 +33,13 @@ class WishlistControllers {
                 setDiscount: shoeFound.setDiscount,
                 images: shoeFound.images,
                 isLiked: true,
-                createDate: new Date()
+                createDate: new Date(),
             });
 
             if (!shoe.data) {
-                return res.status(400).json({ message: "Create wishlist failed!" });
+                return res
+                    .status(400)
+                    .json({ message: "Create wishlist failed!" });
             }
 
             return res.status(200).json(shoe).end();
@@ -43,7 +47,7 @@ class WishlistControllers {
             console.log(error);
             return res.status(400).json({ message: "Create wishlist failed!" });
         }
-    }
+    };
 
     getWishlistShoeByUserId = async (req: Request, res: Response) => {
         try {
@@ -51,31 +55,37 @@ class WishlistControllers {
             const shoes = await this._services.getWishlistShoeByUserId(userId);
 
             if (!shoes.data) {
-                return res.status(400).json({ message: "Get wishlist failed!" });
+                return res
+                    .status(400)
+                    .json({ message: "Get wishlist failed!" });
             }
 
             return res.status(200).json(shoes).end();
         } catch (error) {
             console.log(error);
-            return res.status(400).json({ message: "Get wishlist failed!" })
+            return res.status(400).json({ message: "Get wishlist failed!" });
         }
-    }
+    };
 
     deleteWishlistShoeByShoeId = async (req: Request, res: Response) => {
         try {
             const { shoeId } = req.params;
-            const shoe = await this._services.deleteWishlistShoeByShoeId(shoeId);
+            const shoe = await this._services.deleteWishlistShoeByShoeId(
+                shoeId
+            );
 
             if (shoe.status !== 200) {
-                return res.status(400).json({ message: "Delete wishlist failed!" });
+                return res
+                    .status(400)
+                    .json({ message: "Delete wishlist failed!" });
             }
 
             return res.status(200).json(shoe).end();
         } catch (error) {
             console.log(error);
-            return res.status(400).json({ message: "Delete wishlist failed!" })
+            return res.status(400).json({ message: "Delete wishlist failed!" });
         }
-    }
+    };
 }
 
 export default WishlistControllers;

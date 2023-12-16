@@ -6,8 +6,8 @@ export default interface IShoe extends Document {
     name?: string;
     rate?: number;
     shoeType?: string;
-    colors?: string[];
-    size?: number;
+    colors?: string;
+    sizes?: number;
     price?: number;
     description?: string;
     category?: string;
