@@ -11,7 +11,8 @@ export default class ReviewControllers {
 
     getAllReviews = async (req: Request, res: Response) => {
         try {
-            const reviews = await this._services.getReviews();
+            const { productId } = req.params;
+            const reviews = await this._services.getReviews(productId);
 
             return res.status(200).json(reviews).end();
         } catch (error) {
@@ -46,6 +47,7 @@ export default class ReviewControllers {
                 description,
                 rate,
                 userId,
+                productId,
             } = req.body;
 
             const user = await UserModel.findById(userId);
@@ -58,6 +60,7 @@ export default class ReviewControllers {
                 title,
                 description,
                 rate,
+                productId,
                 authorName: !authorName
                     ? `${user.firstname || ""} ${user.lastname || ""}`
                     : authorName,

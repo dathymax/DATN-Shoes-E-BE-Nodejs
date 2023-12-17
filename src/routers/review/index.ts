@@ -5,17 +5,18 @@ import { Router } from "express";
 const reviewController = new ReviewControllers();
 
 export default (router: Router) => {
-    router.get("/reviews", checkAuthentication, reviewController.getAllReviews);
-    router.get("/reviews/customer", reviewController.getAllReviews);
+    router.get(
+        "/reviews/:productId",
+        checkAuthentication,
+        reviewController.getAllReviews
+    );
+    router.get("/reviews/customer/:productId", reviewController.getAllReviews);
     router.get(
         "/reviews/:id",
         checkAuthentication,
         reviewController.getReviewById
     );
-    router.get(
-        "/reviews/customer/:id",
-        reviewController.getReviewById
-    );
+    router.get("/reviews/customer/:id", reviewController.getReviewById);
     router.post("/reviews", checkAuthentication, reviewController.createReview);
     router.patch(
         "/reviews/:id",
