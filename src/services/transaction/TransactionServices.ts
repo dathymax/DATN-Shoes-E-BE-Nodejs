@@ -73,7 +73,7 @@ class TransactionServices implements ITransactionServices<ITransaction> {
     > => {
         try {
             const transactions = await TransactionModel.find({
-                status: "returns",
+                status: "return",
             }).populate("purchasedProducts");
 
             if (!transactions) {
