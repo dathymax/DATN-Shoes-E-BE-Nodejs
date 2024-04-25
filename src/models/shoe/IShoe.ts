@@ -17,4 +17,5 @@ export default interface IShoe extends Document {
     images?: IImage[];
     createDate?: Date;
     isSoldOut?: boolean;
+    originalPrice?: number;
 }

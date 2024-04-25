@@ -18,6 +18,7 @@ const ShoeSchema = new mongoose.Schema<IShoe>(
         createDate: { type: Date, required: false },
         quantity: { type: Number, required: false },
         isSoldOut: { type: Boolean, required: false },
+        originalPrice: { type: Number, required: true },
     },
     { timestamps: true }
 );

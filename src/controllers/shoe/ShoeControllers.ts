@@ -56,6 +56,7 @@ export default class ShoeControllers {
                 setDiscount,
                 images,
                 quantity,
+                originalPrice,
             } = req.body;
 
             if (!name) {
@@ -77,6 +78,7 @@ export default class ShoeControllers {
                 images,
                 quantity,
                 createDate: new Date(),
+                originalPrice,
             });
 
             return res.status(200).json(shoe).end();
@@ -122,6 +124,7 @@ export default class ShoeControllers {
                 setDiscount,
                 images,
                 quantity,
+                originalPrice,
             } = req.body;
 
             const shoe = await this._services.updateShoeById(id, {
@@ -138,6 +141,7 @@ export default class ShoeControllers {
                 setDiscount,
                 images,
                 quantity,
+                originalPrice,
             });
 
             return res.status(200).json(shoe).end();
