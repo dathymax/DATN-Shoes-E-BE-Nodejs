@@ -1,6 +1,11 @@
-import IImage from "models/image/IImage";
-import IPromoCode from "models/promo-code/IPromoCode";
+import IImage from "../../models/image/IImage";
+import IPromoCode from "../../models/promo-code/IPromoCode";
 import { Document } from "mongoose";
+
+export enum EUserRoles {
+    ADMIN = "admin",
+    USER = "user"
+}
 
 export default interface IUser extends Document {
     firstname?: string;
@@ -8,7 +13,7 @@ export default interface IUser extends Document {
     email?: string;
     username?: string;
     password?: string;
-    role?: string;
+    role?: EUserRoles;
     phoneNumber?: string;
     address?: string;
     addressLabel?: string;

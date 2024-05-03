@@ -4,6 +4,7 @@ import { UserModel } from "../../models/user/UserModel";
 import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
 import { countDays } from "../../helpers";
+import { EUserRoles } from "../../models/user/IUser";
 
 export const getUserByEmail = (email: string) => UserModel.findOne({ email });
 
@@ -21,6 +22,67 @@ export const login = async (req: Request, res: Response) => {
 
         if (!user) {
             return res.status(400).json({ message: "User does not exist!" });
+        }
+
+        if (await bcryptjs.compare(password, user.password)) {
+            const token = jwt.sign(
+                {
+                    email: user.email,
+                    firstname: user.firstname,
+                    lastname: user.lastname,
+                    id: user._id,
+                    address: user.address,
+                    province: user.province,
+                    phoneNumber: user.phoneNumber,
+                    district: user.district,
+                    city: user.city,
+                    addressLabel: user.addressLabel,
+                    postalCode: user.postalCode,
+                    avatar: user.avatar,
+                    username: user.username,
+                    country: user.country,
+                    role: user.role,
+                    promoCodes: user.promoCodes,
+                },
+                process.env.JWT_KEY,
+                {
+                    expiresIn: "7d",
+                }
+            );
+
+            return res.status(200).json(token);
+        }
+
+        return res
+            .status(400)
+            .json({ message: "Email or password is not correct!" });
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json({
+            message:
+                "Error from server, please wait for a moment or try again!",
+        });
+    }
+};
+
+export const loginAdmin = async (req: Request, res: Response) => {
+    try {
+        const { email, password } = req.body;
+
+        if (!email || !password) {
+            return res
+                .status(400)
+                .json({ message: "Email and password is required!" });
+        }
+
+        const user = await UserModel.findOne({ email });
+
+        if (!user) {
+            return res.status(400).json({ message: "User does not exist!" });
+        }
+
+        if (user.role !== EUserRoles.ADMIN) {
+            return res.status(400).json({ message: "You not have permission!" });
         }
 
         if (await bcryptjs.compare(password, user.password)) {
@@ -185,5 +247,5 @@ export const forgotPassword = async (req: Request, res: Response) => {
             }
         });
         console.log(link);
-    } catch (error) {}
+    } catch (error) { }
 };
