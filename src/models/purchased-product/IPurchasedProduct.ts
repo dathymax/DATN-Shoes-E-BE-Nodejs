@@ -13,4 +13,5 @@ export default interface IPurchasedProduct extends Document {
     price?: number | string;
     total?: number | string;
     extCode?: string;
+    originalPrice?: number;
 }

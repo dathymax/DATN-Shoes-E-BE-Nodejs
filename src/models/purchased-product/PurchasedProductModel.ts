@@ -13,6 +13,7 @@ const PurchasedProductSchema = new mongoose.Schema<IPurchasedProduct>({
     price: { type: Number, required: false },
     total: { type: Number, required: false },
     extCode: { type: String, required: false },
+    originalPrice: { type: Number, required: false },
 });
 
 export const PurchasedProductModel = mongoose.model(
